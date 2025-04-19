@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -88,13 +89,22 @@ class _InicialWidgetState extends State<InicialWidget> {
                           ),
                           child: Padding(
                             padding: EdgeInsets.all(2.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(50.0),
-                              child: Image.asset(
-                                'assets/images/user_icon.png',
-                                width: 300.0,
-                                height: 200.0,
-                                fit: BoxFit.cover,
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(ConfigurcaoWidget.routeName);
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(50.0),
+                                child: Image.asset(
+                                  'assets/images/user_icon.png',
+                                  width: 300.0,
+                                  height: 200.0,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
@@ -102,7 +112,9 @@ class _InicialWidgetState extends State<InicialWidget> {
                       ),
                       Expanded(
                         child: Text(
-                          'Bem vindo, usuário',
+                          FFLocalizations.of(context).getText(
+                            '899y2kmb' /* Bem vindo, usuário */,
+                          ),
                           style: FlutterFlowTheme.of(context)
                               .headlineMedium
                               .override(
@@ -220,7 +232,10 @@ class _InicialWidgetState extends State<InicialWidget> {
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText:
-                                                'Procure em suas listas...',
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                              '8i36ce6h' /* Procure em suas listas... */,
+                                            ),
                                             labelStyle: FlutterFlowTheme.of(
                                                     context)
                                                 .labelMedium
@@ -300,7 +315,80 @@ class _InicialWidgetState extends State<InicialWidget> {
                       ),
                     ),
                   ),
-                  content: Container(),
+                  content: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                    child: GridView(
+                      padding: EdgeInsets.fromLTRB(
+                        0,
+                        10.0,
+                        0,
+                        10.0,
+                      ),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 10.0,
+                        childAspectRatio: 1.0,
+                      ),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        Container(
+                          width: 100.0,
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).tertiary,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20.0),
+                              bottomRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 100.0,
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).tertiary,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20.0),
+                              bottomRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 100.0,
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).tertiary,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20.0),
+                              bottomRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 100.0,
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).tertiary,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20.0),
+                              bottomRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),

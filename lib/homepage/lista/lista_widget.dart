@@ -144,7 +144,9 @@ class _ListaWidgetState extends State<ListaWidget> {
                               fontSize: 28.0,
                               letterSpacing: 0.0,
                             ),
-                    hintText: 'Titulo:',
+                    hintText: FFLocalizations.of(context).getText(
+                      'kehnl0bk' /* Titulo: */,
+                    ),
                     hintStyle:
                         FlutterFlowTheme.of(context).labelMedium.override(
                               fontFamily: 'Inter',
@@ -211,7 +213,9 @@ class _ListaWidgetState extends State<ListaWidget> {
                               fontSize: 16.0,
                               letterSpacing: 0.0,
                             ),
-                    hintText: 'Comece a escrever:',
+                    hintText: FFLocalizations.of(context).getText(
+                      '7a1mmb0d' /* Comece a escrever: */,
+                    ),
                     hintStyle:
                         FlutterFlowTheme.of(context).labelMedium.override(
                               fontFamily: 'Inter',

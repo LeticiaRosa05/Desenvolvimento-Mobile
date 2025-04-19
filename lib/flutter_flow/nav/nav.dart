@@ -95,14 +95,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginSingUpWidget(),
         ),
         FFRoute(
-          name: HomePageWidget.routeName,
-          path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
-        ),
-        FFRoute(
-          name: Homepage1Widget.routeName,
-          path: Homepage1Widget.routePath,
-          builder: (context, params) => Homepage1Widget(),
+          name: ConfigurcaoWidget.routeName,
+          path: ConfigurcaoWidget.routePath,
+          builder: (context, params) => ConfigurcaoWidget(),
         ),
         FFRoute(
           name: InicialWidget.routeName,
@@ -231,6 +226,7 @@ class FFParameters {
     String paramName,
     ParamType type, {
     bool isList = false,
+    List<String>? collectionNamePath,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -248,6 +244,7 @@ class FFParameters {
       param,
       type,
       isList,
+      collectionNamePath: collectionNamePath,
     );
   }
 }

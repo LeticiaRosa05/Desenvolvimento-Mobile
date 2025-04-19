@@ -10,6 +10,8 @@ class LoginSingUpModel extends FlutterFlowModel<LoginSingUpWidget> {
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
+  int get tabBarPreviousIndex =>
+      tabBarController != null ? tabBarController!.previousIndex : 0;
 
   // State field(s) for emailLogin widget.
   FocusNode? emailLoginFocusNode;
@@ -20,6 +22,10 @@ class LoginSingUpModel extends FlutterFlowModel<LoginSingUpWidget> {
   TextEditingController? senhaLoginTextController;
   late bool senhaLoginVisibility;
   String? Function(BuildContext, String?)? senhaLoginTextControllerValidator;
+  // State field(s) for nomeUsuario widget.
+  FocusNode? nomeUsuarioFocusNode;
+  TextEditingController? nomeUsuarioTextController;
+  String? Function(BuildContext, String?)? nomeUsuarioTextControllerValidator;
   // State field(s) for emailCadastro widget.
   FocusNode? emailCadastroFocusNode;
   TextEditingController? emailCadastroTextController;
@@ -51,6 +57,9 @@ class LoginSingUpModel extends FlutterFlowModel<LoginSingUpWidget> {
 
     senhaLoginFocusNode?.dispose();
     senhaLoginTextController?.dispose();
+
+    nomeUsuarioFocusNode?.dispose();
+    nomeUsuarioTextController?.dispose();
 
     emailCadastroFocusNode?.dispose();
     emailCadastroTextController?.dispose();
