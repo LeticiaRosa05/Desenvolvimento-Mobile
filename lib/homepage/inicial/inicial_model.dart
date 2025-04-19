@@ -1,8 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'homepage1_widget.dart' show Homepage1Widget;
+import '/index.dart';
+import 'inicial_widget.dart' show InicialWidget;
 import 'package:flutter/material.dart';
 
-class Homepage1Model extends FlutterFlowModel<Homepage1Widget> {
+class InicialModel extends FlutterFlowModel<InicialWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.

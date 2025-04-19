@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -38,11 +39,15 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
       length: 2,
       initialIndex: 0,
     )..addListener(() => safeSetState(() {}));
+
     _model.emailLoginTextController ??= TextEditingController();
     _model.emailLoginFocusNode ??= FocusNode();
 
     _model.senhaLoginTextController ??= TextEditingController();
     _model.senhaLoginFocusNode ??= FocusNode();
+
+    _model.nomeUsuarioTextController ??= TextEditingController();
+    _model.nomeUsuarioFocusNode ??= FocusNode();
 
     _model.emailCadastroTextController ??= TextEditingController();
     _model.emailCadastroFocusNode ??= FocusNode();
@@ -125,7 +130,7 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.white,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Row(
@@ -212,10 +217,16 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                         0.0, 12.0, 16.0, 12.0),
                                     tabs: [
                                       Tab(
-                                        text: 'Login',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          's1redc8l' /* Entrar */,
+                                        ),
                                       ),
                                       Tab(
-                                        text: 'Cadastro',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'f3ur3fcy' /* Cadastro */,
+                                        ),
                                       ),
                                     ],
                                     controller: _model.tabBarController,
@@ -245,7 +256,10 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                     .fromSTEB(
                                                         0.0, 12.0, 0.0, 24.0),
                                                 child: Text(
-                                                  'Já tem uma conta? Faça login abaixo:',
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    '2g3qo903' /* Já tem uma conta? Faça login a... */,
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .labelMedium
@@ -278,7 +292,12 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                     ],
                                                     obscureText: false,
                                                     decoration: InputDecoration(
-                                                      labelText: 'Email',
+                                                      labelText:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                        'a4i7bfog' /* Email */,
+                                                      ),
                                                       labelStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -286,8 +305,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Plus Jakarta Sans',
-                                                                color: Color(
-                                                                    0xFF57636C),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 14.0,
                                                                 letterSpacing:
                                                                     0.0,
@@ -298,8 +318,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       enabledBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFE0E3E7),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent1,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -309,8 +330,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       focusedBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFF4B39EF),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent3,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -320,8 +342,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       errorBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFFF5963),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -331,8 +354,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       focusedErrorBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFFF5963),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -340,7 +364,10 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                                 .circular(40.0),
                                                       ),
                                                       filled: true,
-                                                      fillColor: Colors.white,
+                                                      fillColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBackground,
                                                       contentPadding:
                                                           EdgeInsets.all(24.0),
                                                     ),
@@ -350,8 +377,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                         .override(
                                                           fontFamily:
                                                               'Plus Jakarta Sans',
-                                                          color:
-                                                              Color(0xFF101213),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
                                                           fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -360,7 +388,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                     keyboardType: TextInputType
                                                         .emailAddress,
                                                     cursorColor:
-                                                        Color(0xFF4B39EF),
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
                                                     validator: _model
                                                         .emailLoginTextControllerValidator
                                                         .asValidator(context),
@@ -385,7 +415,12 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                     obscureText: !_model
                                                         .senhaLoginVisibility,
                                                     decoration: InputDecoration(
-                                                      labelText: 'Senha',
+                                                      labelText:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                        'nw6zrolr' /* Senha */,
+                                                      ),
                                                       labelStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -393,8 +428,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Plus Jakarta Sans',
-                                                                color: Color(
-                                                                    0xFF57636C),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 14.0,
                                                                 letterSpacing:
                                                                     0.0,
@@ -405,8 +441,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       enabledBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFE0E3E7),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent1,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -416,8 +453,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       focusedBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFF4B39EF),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent3,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -427,8 +465,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       errorBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFFF5963),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -438,8 +477,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       focusedErrorBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFFF5963),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -447,7 +487,10 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                                 .circular(40.0),
                                                       ),
                                                       filled: true,
-                                                      fillColor: Colors.white,
+                                                      fillColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBackground,
                                                       contentPadding:
                                                           EdgeInsets.all(24.0),
                                                       suffixIcon: InkWell(
@@ -467,8 +510,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                                   .visibility_outlined
                                                               : Icons
                                                                   .visibility_off_outlined,
-                                                          color:
-                                                              Color(0xFF57636C),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
                                                           size: 24.0,
                                                         ),
                                                       ),
@@ -479,15 +523,18 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                         .override(
                                                           fontFamily:
                                                               'Plus Jakarta Sans',
-                                                          color:
-                                                              Color(0xFF101213),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
                                                           fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w500,
                                                         ),
                                                     cursorColor:
-                                                        Color(0xFF4B39EF),
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
                                                     validator: _model
                                                         .senhaLoginTextControllerValidator
                                                         .asValidator(context),
@@ -526,7 +573,11 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                               .routeName,
                                                           context.mounted);
                                                     },
-                                                    text: 'Login',
+                                                    text: FFLocalizations.of(
+                                                            context)
+                                                        .getText(
+                                                      'xcsbs0dv' /* Entrar */,
+                                                    ),
                                                     options: FFButtonOptions(
                                                       width: 230.0,
                                                       height: 52.0,
@@ -577,6 +628,70 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                   ),
                                                 ),
                                               ),
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 0.0, 16.0),
+                                                  child: FFButtonWidget(
+                                                    onPressed: () async {
+                                                      context.pushNamed(
+                                                          LogoWidget.routeName);
+                                                    },
+                                                    text: FFLocalizations.of(
+                                                            context)
+                                                        .getText(
+                                                      '5h04zhjp' /* Esqueci minha senha */,
+                                                    ),
+                                                    options: FFButtonOptions(
+                                                      width: 230.0,
+                                                      height: 44.0,
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      iconPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Plus Jakarta Sans',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                      elevation: 0.0,
+                                                      borderSide: BorderSide(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           ).animateOnPageLoad(animationsMap[
                                               'columnOnPageLoadAnimation1']!),
@@ -599,7 +714,10 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                     .fromSTEB(
                                                         0.0, 12.0, 0.0, 24.0),
                                                 child: Text(
-                                                  'Ainda não tem uma conta? Por favor, preencha os campos:',
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'p79jyqha' /* Ainda não tem uma conta? Por f... */,
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .labelMedium
@@ -607,12 +725,136 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                         fontFamily:
                                                             'Plus Jakarta Sans',
                                                         color:
-                                                            Color(0xFF57636C),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
                                                         fontSize: 14.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.w500,
                                                       ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 0.0, 16.0),
+                                                child: Container(
+                                                  width: double.infinity,
+                                                  child: TextFormField(
+                                                    controller: _model
+                                                        .nomeUsuarioTextController,
+                                                    focusNode: _model
+                                                        .nomeUsuarioFocusNode,
+                                                    autofocus: true,
+                                                    autofillHints: [
+                                                      AutofillHints.name
+                                                    ],
+                                                    obscureText: false,
+                                                    decoration: InputDecoration(
+                                                      labelText:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                        'fnuha20z' /* Nome de Usuário */,
+                                                      ),
+                                                      labelStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Plus Jakarta Sans',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                fontSize: 14.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(40.0),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent3,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(40.0),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(40.0),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(40.0),
+                                                      ),
+                                                      filled: true,
+                                                      fillColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBackground,
+                                                      contentPadding:
+                                                          EdgeInsets.all(24.0),
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Plus Jakarta Sans',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                    keyboardType: TextInputType
+                                                        .emailAddress,
+                                                    cursorColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    validator: _model
+                                                        .nomeUsuarioTextControllerValidator
+                                                        .asValidator(context),
+                                                  ),
                                                 ),
                                               ),
                                               Padding(
@@ -632,7 +874,12 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                     ],
                                                     obscureText: false,
                                                     decoration: InputDecoration(
-                                                      labelText: 'Email',
+                                                      labelText:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                        '1x0gx5m6' /* Email */,
+                                                      ),
                                                       labelStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -640,8 +887,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Plus Jakarta Sans',
-                                                                color: Color(
-                                                                    0xFF57636C),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 14.0,
                                                                 letterSpacing:
                                                                     0.0,
@@ -652,8 +900,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       enabledBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFE0E3E7),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -663,8 +912,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       focusedBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFF4B39EF),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent3,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -674,8 +924,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       errorBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFFF5963),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -685,8 +936,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       focusedErrorBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFFF5963),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -694,7 +946,10 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                                 .circular(40.0),
                                                       ),
                                                       filled: true,
-                                                      fillColor: Colors.white,
+                                                      fillColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBackground,
                                                       contentPadding:
                                                           EdgeInsets.all(24.0),
                                                     ),
@@ -704,8 +959,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                         .override(
                                                           fontFamily:
                                                               'Plus Jakarta Sans',
-                                                          color:
-                                                              Color(0xFF101213),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
                                                           fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -714,7 +970,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                     keyboardType: TextInputType
                                                         .emailAddress,
                                                     cursorColor:
-                                                        Color(0xFF4B39EF),
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
                                                     validator: _model
                                                         .emailCadastroTextControllerValidator
                                                         .asValidator(context),
@@ -739,7 +997,12 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                     obscureText: !_model
                                                         .senhaCadastroVisibility,
                                                     decoration: InputDecoration(
-                                                      labelText: 'Senha',
+                                                      labelText:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                        'ldzny6c0' /* Senha */,
+                                                      ),
                                                       labelStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -747,8 +1010,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Plus Jakarta Sans',
-                                                                color: Color(
-                                                                    0xFF57636C),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 14.0,
                                                                 letterSpacing:
                                                                     0.0,
@@ -759,8 +1023,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       enabledBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFE0E3E7),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -770,8 +1035,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       focusedBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFF4B39EF),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent3,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -781,8 +1047,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       errorBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFFF5963),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -792,8 +1059,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       focusedErrorBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFFF5963),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -801,7 +1069,10 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                                 .circular(40.0),
                                                       ),
                                                       filled: true,
-                                                      fillColor: Colors.white,
+                                                      fillColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBackground,
                                                       contentPadding:
                                                           EdgeInsets.all(24.0),
                                                       suffixIcon: InkWell(
@@ -821,8 +1092,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                                   .visibility_outlined
                                                               : Icons
                                                                   .visibility_off_outlined,
-                                                          color:
-                                                              Color(0xFF57636C),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
                                                           size: 24.0,
                                                         ),
                                                       ),
@@ -833,15 +1105,18 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                         .override(
                                                           fontFamily:
                                                               'Plus Jakarta Sans',
-                                                          color:
-                                                              Color(0xFF101213),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
                                                           fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w500,
                                                         ),
                                                     cursorColor:
-                                                        Color(0xFF4B39EF),
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
                                                     validator: _model
                                                         .senhaCadastroTextControllerValidator
                                                         .asValidator(context),
@@ -867,7 +1142,11 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                         .confirmarSenhaVisibility,
                                                     decoration: InputDecoration(
                                                       labelText:
-                                                          'Confirmar Senha',
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                        'koci2fx6' /* Confirmar Senha */,
+                                                      ),
                                                       labelStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -875,8 +1154,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Plus Jakarta Sans',
-                                                                color: Color(
-                                                                    0xFF57636C),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 14.0,
                                                                 letterSpacing:
                                                                     0.0,
@@ -961,8 +1241,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                         .override(
                                                           fontFamily:
                                                               'Plus Jakarta Sans',
-                                                          color:
-                                                              Color(0xFF101213),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
                                                           fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
@@ -970,7 +1251,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                         ),
                                                     minLines: 1,
                                                     cursorColor:
-                                                        Color(0xFF4B39EF),
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
                                                     validator: _model
                                                         .confirmarSenhaTextControllerValidator
                                                         .asValidator(context),
@@ -1010,7 +1293,7 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                           .createAccountWithEmail(
                                                         context,
                                                         _model
-                                                            .emailCadastroTextController
+                                                            .nomeUsuarioTextController
                                                             .text,
                                                         _model
                                                             .senhaCadastroTextController
@@ -1020,12 +1303,31 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                         return;
                                                       }
 
+                                                      await UsersRecord
+                                                          .collection
+                                                          .doc(user.uid)
+                                                          .update(
+                                                              createUsersRecordData(
+                                                            email: _model
+                                                                .nomeUsuarioTextController
+                                                                .text,
+                                                            displayName: _model
+                                                                .nomeUsuarioTextController
+                                                                .text,
+                                                            createdTime:
+                                                                getCurrentTimestamp,
+                                                          ));
+
                                                       context.goNamedAuth(
                                                           InicialWidget
                                                               .routeName,
                                                           context.mounted);
                                                     },
-                                                    text: 'Criar Conta',
+                                                    text: FFLocalizations.of(
+                                                            context)
+                                                        .getText(
+                                                      'c0vdlzxb' /* Criar Conta */,
+                                                    ),
                                                     options: FFButtonOptions(
                                                       width: 230.0,
                                                       height: 52.0,
