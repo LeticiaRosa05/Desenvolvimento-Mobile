@@ -862,8 +862,6 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                           fontWeight:
                                                               FontWeight.w500,
                                                         ),
-                                                    keyboardType: TextInputType
-                                                        .emailAddress,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -1357,7 +1355,7 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                                   .createAccountWithEmail(
                                                             context,
                                                             _model
-                                                                .nomeUsuarioTextController
+                                                                .emailCadastroTextController
                                                                 .text,
                                                             _model
                                                                 .senhaCadastroTextController
@@ -1366,6 +1364,16 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                           if (user == null) {
                                                             return;
                                                           }
+
+                                                          await UsersRecord
+                                                              .collection
+                                                              .doc(user.uid)
+                                                              .update(
+                                                                  createUsersRecordData(
+                                                                displayName: _model
+                                                                    .nomeUsuarioTextController
+                                                                    .text,
+                                                              ));
 
                                                           context.goNamedAuth(
                                                               InicialWidget

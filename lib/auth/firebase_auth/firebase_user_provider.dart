@@ -5,8 +5,8 @@ import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
 
-class ListLink2FirebaseUser extends BaseAuthUser {
-  ListLink2FirebaseUser(this.user);
+class ListLinkFirebaseUser extends BaseAuthUser {
+  ListLinkFirebaseUser(this.user);
   User? user;
   bool get loggedIn => user != null;
 
@@ -59,17 +59,17 @@ class ListLink2FirebaseUser extends BaseAuthUser {
   static BaseAuthUser fromUserCredential(UserCredential userCredential) =>
       fromFirebaseUser(userCredential.user);
   static BaseAuthUser fromFirebaseUser(User? user) =>
-      ListLink2FirebaseUser(user);
+      ListLinkFirebaseUser(user);
 }
 
-Stream<BaseAuthUser> listLink2FirebaseUserStream() => FirebaseAuth.instance
+Stream<BaseAuthUser> listLinkFirebaseUserStream() => FirebaseAuth.instance
         .authStateChanges()
         .debounce((user) => user == null && !loggedIn
             ? TimerStream(true, const Duration(seconds: 1))
             : Stream.value(user))
         .map<BaseAuthUser>(
       (user) {
-        currentUser = ListLink2FirebaseUser(user);
+        currentUser = ListLinkFirebaseUser(user);
         return currentUser!;
       },
     );

@@ -271,60 +271,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Todas as listas',
       'en': '',
     },
-    'wgipnnco': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
-      'en': '',
-    },
-    'ujzuq6ts': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
-    'uw7zjwkc': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
-      'en': '',
-    },
-    'ni4isffa': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
-    '2drlokl1': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
-      'en': '',
-    },
-    'gwunz5nk': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
-    'uwg3054e': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
-      'en': '',
-    },
-    '84dr11dn': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
-    'g50e77ag': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
-      'en': '',
-    },
-    'd4ir34ov': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
-    'z2ndc126': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
-      'en': '',
-    },
-    's0n8i4x6': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
     'zm9ekyk5': {
       'pt': 'Home',
       'en': '',
@@ -332,15 +278,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // lista
   {
-    'kehnl0bk': {
+    '0mv24srz': {
       'pt': 'Titulo:',
       'en': 'Title:',
     },
-    '7a1mmb0d': {
+    'yxoxy2cj': {
       'pt': 'Comece a escrever:',
       'en': 'Start writing:',
     },
-    'h4pw3uqz': {
+    '6jmfkdcu': {
       'pt': 'Home',
       'en': 'Home',
     },
@@ -376,7 +322,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Voltar',
       'en': '',
     },
-    'xrgjsadq': {
+    'ww9xyzrv': {
       'pt': 'Home',
       'en': 'Home',
     },

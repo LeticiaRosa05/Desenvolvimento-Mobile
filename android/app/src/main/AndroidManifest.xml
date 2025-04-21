@@ -5,7 +5,7 @@
 
 
     <application
-        android:label="ListLink2"
+        android:label="ListLink"
         tools:replace="android:label"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
@@ -45,7 +45,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="listlink2" android:host="listlink2.com" />
+                <data android:scheme="listlink" android:host="listlink.com" />
             </intent-filter>
 
         </activity>

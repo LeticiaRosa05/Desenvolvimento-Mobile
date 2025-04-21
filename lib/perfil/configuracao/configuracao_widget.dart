@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_language_selector.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -10,7 +11,12 @@ import 'configuracao_model.dart';
 export 'configuracao_model.dart';
 
 class ConfiguracaoWidget extends StatefulWidget {
-  const ConfiguracaoWidget({super.key});
+  const ConfiguracaoWidget({
+    super.key,
+    this.nomeUsuario,
+  });
+
+  final DocumentReference? nomeUsuario;
 
   static String routeName = 'Configuracao';
   static String routePath = '/configuracao';
@@ -135,20 +141,45 @@ class _ConfiguracaoWidgetState extends State<ConfiguracaoWidget> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    'j4s7inj5' /* Nome usuário */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineSmall
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        fontSize: 24.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
+                                StreamBuilder<UsersRecord>(
+                                  stream: UsersRecord.getDocument(
+                                      widget.nomeUsuario!),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+
+                                    final textUsersRecord = snapshot.data!;
+
+                                    return Text(
+                                      FFLocalizations.of(context).getText(
+                                        'j4s7inj5' /* Nome usuário */,
                                       ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .headlineSmall
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 24.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    );
+                                  },
                                 ),
                               ],
                             ),
