@@ -155,7 +155,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     's1redc8l': {
       'pt': 'Entrar',
-      'en': 'Login',
+      'en': 'To enter',
     },
     '2g3qo903': {
       'pt': 'Já tem uma conta? Faça login abaixo:',
@@ -171,11 +171,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'xcsbs0dv': {
       'pt': 'Entrar',
-      'en': 'Login',
+      'en': 'To enter',
     },
     '5h04zhjp': {
       'pt': 'Esqueci minha senha',
-      'en': '',
+      'en': 'I forgot my password',
     },
     'f3ur3fcy': {
       'pt': 'Cadastro',
@@ -187,7 +187,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'fnuha20z': {
       'pt': 'Nome de Usuário',
-      'en': 'E-mail',
+      'en': 'Username',
     },
     '1x0gx5m6': {
       'pt': 'Email',
@@ -210,12 +210,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Home',
     },
   },
-  // Configuracao
+  // Config
   {
-    'j4s7inj5': {
-      'pt': 'Nome usuário',
-      'en': 'User name',
-    },
     't7v06xa6': {
       'pt': 'Mudar para modo escuro',
       'en': 'Switch to dark mode',
@@ -256,24 +252,24 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // inicial
   {
     '899y2kmb': {
-      'pt': 'Bem vindo, usuário',
-      'en': '',
+      'pt': 'Bem vindo, ',
+      'en': 'Welcome,',
     },
     '8i36ce6h': {
       'pt': 'Procure em suas listas...',
-      'en': '',
+      'en': 'Search your lists...',
     },
     'qxkzh21q': {
       'pt': 'Listas marcadas',
-      'en': '',
+      'en': 'Marked lists',
     },
     'hzac5n3n': {
       'pt': 'Todas as listas',
-      'en': '',
+      'en': 'All lists',
     },
     'zm9ekyk5': {
       'pt': 'Home',
-      'en': '',
+      'en': 'Home',
     },
   },
   // lista
@@ -286,6 +282,22 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Comece a escrever:',
       'en': 'Start writing:',
     },
+    'n0b3ttyn': {
+      'pt': 'Fechar aba',
+      'en': 'Close tab',
+    },
+    'cdm7mxsw': {
+      'pt': 'Deletar',
+      'en': 'Delete',
+    },
+    '6kaxyj91': {
+      'pt': 'Usuários nessa lista',
+      'en': '',
+    },
+    'o1bm1r81': {
+      'pt': 'Add user',
+      'en': '',
+    },
     '6jmfkdcu': {
       'pt': 'Home',
       'en': 'Home',
@@ -295,32 +307,33 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'oxcam4xr': {
       'pt': 'Back',
-      'en': '',
+      'en': 'Back',
     },
     '04deesm3': {
       'pt': 'Recuperar conta',
-      'en': '',
+      'en': 'Recover account',
     },
     'j6e4nmxs': {
       'pt':
           'Te enviaremos um email com um link para resetar sua senha, por favor escreva o email associado à sua conta abaixo.',
-      'en': '',
+      'en':
+          'We will send you an email with a link to reset your password, please enter the email associated with your account below.',
     },
     'o467zu1q': {
       'pt': 'Seu endereço de email...',
-      'en': '',
+      'en': 'Your email address...',
     },
     'ybr52sgc': {
       'pt': 'Escreva seu email...',
-      'en': '',
+      'en': 'Write your email...',
     },
     'jbcuaf3v': {
       'pt': 'Enviar Link',
-      'en': '',
+      'en': 'Send Link',
     },
     'izqiyb53': {
       'pt': 'Voltar',
-      'en': '',
+      'en': 'To go back',
     },
     'ww9xyzrv': {
       'pt': 'Home',

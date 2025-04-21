@@ -12,7 +12,13 @@ import 'inicial_model.dart';
 export 'inicial_model.dart';
 
 class InicialWidget extends StatefulWidget {
-  const InicialWidget({super.key});
+  const InicialWidget({
+    super.key,
+    this.selectedLists,
+  });
+
+  /// selectedLists
+  final List<String>? selectedLists;
 
   static String routeName = 'inicial';
   static String routePath = '/inicial';
@@ -123,25 +129,51 @@ class _InicialWidgetState extends State<InicialWidget> {
                                 size: 24.0,
                               ),
                               onPressed: () async {
-                                context.pushNamed(ConfiguracaoWidget.routeName);
+                                context.pushNamed(
+                                  ConfigWidget.routeName,
+                                  queryParameters: {
+                                    'nomeUsuario': serializeParam(
+                                      currentUserReference,
+                                      ParamType.DocumentReference,
+                                    ),
+                                  }.withoutNulls,
+                                );
                               },
                             ),
                           ),
-                          Expanded(
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                '899y2kmb' /* Bem vindo, usuário */,
+                          Text(
+                            FFLocalizations.of(context).getText(
+                              '899y2kmb' /* Bem vindo,  */,
+                            ),
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.of(context)
+                                .headlineMedium
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 24.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: AuthUserStreamWidget(
+                              builder: (context) => AutoSizeText(
+                                currentUserDisplayName.maybeHandleOverflow(
+                                  maxChars: 10,
+                                  replacement: '…',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineMedium
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      fontSize: 24.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineMedium
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    fontSize: 24.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
                             ),
                           ),
                         ],
@@ -230,6 +262,15 @@ class _InicialWidgetState extends State<InicialWidget> {
                                               controller: _model.textController,
                                               focusNode:
                                                   _model.textFieldFocusNode,
+                                              onFieldSubmitted: (_) async {
+                                                await queryListsRecordOnce(
+                                                  queryBuilder: (listsRecord) =>
+                                                      listsRecord.where(
+                                                    'title',
+                                                    isEqualTo: '',
+                                                  ),
+                                                );
+                                              },
                                               autofocus: false,
                                               obscureText: false,
                                               decoration: InputDecoration(
@@ -295,24 +336,42 @@ class _InicialWidgetState extends State<InicialWidget> {
                                           ),
                                         ),
                                       ),
-                                      FlutterFlowIconButton(
-                                        borderColor:
-                                            FlutterFlowTheme.of(context)
-                                                .alternate,
-                                        borderRadius: 10.0,
-                                        borderWidth: 1.0,
-                                        buttonSize: 40.0,
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        icon: FaIcon(
-                                          FontAwesomeIcons.trashAlt,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 24.0,
+                                      Opacity(
+                                        opacity: 0.0,
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onLongPress: () async {
+                                            FFAppState().selectedLists = widget
+                                                .selectedLists!
+                                                .toList()
+                                                .cast<String>();
+                                            safeSetState(() {});
+                                          },
+                                          child: FlutterFlowIconButton(
+                                            borderColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .alternate,
+                                            borderRadius: 10.0,
+                                            borderWidth: 1.0,
+                                            buttonSize: 40.0,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryBackground,
+                                            icon: FaIcon(
+                                              FontAwesomeIcons.trashAlt,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () {
+                                              print('IconButton pressed ...');
+                                            },
+                                          ),
                                         ),
-                                        onPressed: () async {
-                                          Navigator.pop(context);
-                                        },
                                       ),
                                     ],
                                   ),
@@ -430,6 +489,45 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                 }.withoutNulls,
                                               );
                                             },
+                                            onLongPress: () async {
+                                              var confirmDialogResponse =
+                                                  await showDialog<bool>(
+                                                        context: context,
+                                                        builder:
+                                                            (alertDialogContext) {
+                                                          return AlertDialog(
+                                                            title: Text(
+                                                                'Apagar Lista'),
+                                                            content: Text(
+                                                                'Realmente deseja deletar a lista?'),
+                                                            actions: [
+                                                              TextButton(
+                                                                onPressed: () =>
+                                                                    Navigator.pop(
+                                                                        alertDialogContext,
+                                                                        false),
+                                                                child: Text(
+                                                                    'Cancelar'),
+                                                              ),
+                                                              TextButton(
+                                                                onPressed: () =>
+                                                                    Navigator.pop(
+                                                                        alertDialogContext,
+                                                                        true),
+                                                                child: Text(
+                                                                    'Confirmar'),
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      ) ??
+                                                      false;
+                                              if (confirmDialogResponse) {
+                                                await listViewListsRecord
+                                                    .reference
+                                                    .delete();
+                                              }
+                                            },
                                             child: Container(
                                               width: 170.0,
                                               height: 100.0,
@@ -471,18 +569,19 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                                         5.0,
                                                                         5.0,
                                                                         5.0),
-                                                            child: Text(
+                                                            child: AutoSizeText(
                                                               listViewListsRecord
                                                                   .content
                                                                   .maybeHandleOverflow(
-                                                                maxChars: 65,
+                                                                maxChars: 100,
                                                                 replacement:
                                                                     '…',
                                                               ),
                                                               textAlign:
                                                                   TextAlign
-                                                                      .justify,
+                                                                      .start,
                                                               maxLines: 5,
+                                                              minFontSize: 12.0,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .labelMedium
@@ -505,7 +604,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                               0.0, 1.0),
                                                       child: Container(
                                                         width: 152.7,
-                                                        height: 70.5,
+                                                        height: 50.0,
                                                         decoration:
                                                             BoxDecoration(
                                                           color: FlutterFlowTheme
@@ -527,28 +626,35 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                               alignment:
                                                                   AlignmentDirectional(
                                                                       -1.0,
-                                                                      -1.0),
+                                                                      0.0),
                                                               child: Padding(
                                                                 padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             5.0,
-                                                                            5.0,
+                                                                            0.0,
                                                                             0.0,
                                                                             0.0),
-                                                                child: Text(
+                                                                child:
+                                                                    AutoSizeText(
                                                                   listViewListsRecord
-                                                                      .title,
+                                                                      .title
+                                                                      .maybeHandleOverflow(
+                                                                    maxChars: 7,
+                                                                    replacement:
+                                                                        '…',
+                                                                  ),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .start,
+                                                                  minFontSize:
+                                                                      14.0,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .headlineMedium
+                                                                      .titleMedium
                                                                       .override(
                                                                         fontFamily:
                                                                             'Inter Tight',
-                                                                        color: Color(
-                                                                            0xFF181818),
-                                                                        fontSize:
-                                                                            20.0,
                                                                         letterSpacing:
                                                                             0.0,
                                                                       ),
@@ -592,7 +698,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                                   Align(
                                                                     alignment:
                                                                         AlignmentDirectional(
-                                                                            -2.67,
+                                                                            -4.08,
                                                                             0.83),
                                                                     child:
                                                                         FlutterFlowIconButton(
@@ -739,6 +845,44 @@ class _InicialWidgetState extends State<InicialWidget> {
                                           }.withoutNulls,
                                         );
                                       },
+                                      onLongPress: () async {
+                                        var confirmDialogResponse =
+                                            await showDialog<bool>(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title:
+                                                          Text('Apagar Lista'),
+                                                      content: Text(
+                                                          'Realmente deseja deletar a lista?'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  false),
+                                                          child:
+                                                              Text('Cancelar'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  true),
+                                                          child:
+                                                              Text('Confirmar'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                ) ??
+                                                false;
+                                        if (confirmDialogResponse) {
+                                          await gridViewListsRecord.reference
+                                              .delete();
+                                        }
+                                      },
                                       child: Container(
                                         width: 170.0,
                                         height: 100.0,
@@ -778,9 +922,13 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                                   5.0),
                                                       child: AutoSizeText(
                                                         gridViewListsRecord
-                                                            .content,
+                                                            .content
+                                                            .maybeHandleOverflow(
+                                                          maxChars: 115,
+                                                          replacement: '…',
+                                                        ),
                                                         textAlign:
-                                                            TextAlign.justify,
+                                                            TextAlign.start,
                                                         maxLines: 5,
                                                         minFontSize: 14.0,
                                                         style:
@@ -804,8 +952,8 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                 alignment: AlignmentDirectional(
                                                     0.0, 1.0),
                                                 child: Container(
-                                                  width: 157.44,
-                                                  height: 70.5,
+                                                  width: 157.4,
+                                                  height: 50.0,
                                                   decoration: BoxDecoration(
                                                     color: FlutterFlowTheme.of(
                                                             context)
@@ -824,30 +972,31 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                       Align(
                                                         alignment:
                                                             AlignmentDirectional(
-                                                                -1.0, -1.0),
+                                                                0.0, 0.0),
                                                         child: Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       5.0,
-                                                                      5.0,
+                                                                      0.0,
                                                                       0.0,
                                                                       0.0),
-                                                          child: Text(
+                                                          child: AutoSizeText(
                                                             gridViewListsRecord
-                                                                .title,
+                                                                .title
+                                                                .maybeHandleOverflow(
+                                                              maxChars: 7,
+                                                              replacement: '…',
+                                                            ),
                                                             textAlign:
                                                                 TextAlign.start,
+                                                            minFontSize: 14.0,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .headlineMedium
+                                                                .titleMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Inter Tight',
-                                                                  color: Color(
-                                                                      0xFF181818),
-                                                                  fontSize:
-                                                                      20.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                 ),

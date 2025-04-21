@@ -95,9 +95,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginSingUpWidget(),
         ),
         FFRoute(
-          name: ConfiguracaoWidget.routeName,
-          path: ConfiguracaoWidget.routePath,
-          builder: (context, params) => ConfiguracaoWidget(
+          name: ConfigWidget.routeName,
+          path: ConfigWidget.routePath,
+          builder: (context, params) => ConfigWidget(
             nomeUsuario: params.getParam(
               'nomeUsuario',
               ParamType.DocumentReference,
@@ -109,7 +109,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: InicialWidget.routeName,
           path: InicialWidget.routePath,
-          builder: (context, params) => InicialWidget(),
+          builder: (context, params) => InicialWidget(
+            selectedLists: params.getParam<String>(
+              'selectedLists',
+              ParamType.String,
+              isList: true,
+            ),
+          ),
         ),
         FFRoute(
           name: ListaWidget.routeName,
