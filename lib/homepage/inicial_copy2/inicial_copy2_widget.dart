@@ -6,28 +6,28 @@ import '/index.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'inicial_model.dart';
-export 'inicial_model.dart';
+import 'inicial_copy2_model.dart';
+export 'inicial_copy2_model.dart';
 
-class InicialWidget extends StatefulWidget {
-  const InicialWidget({super.key});
+class InicialCopy2Widget extends StatefulWidget {
+  const InicialCopy2Widget({super.key});
 
-  static String routeName = 'inicial';
-  static String routePath = '/inicial';
+  static String routeName = 'inicialCopy2';
+  static String routePath = '/inicialCopy2';
 
   @override
-  State<InicialWidget> createState() => _InicialWidgetState();
+  State<InicialCopy2Widget> createState() => _InicialCopy2WidgetState();
 }
 
-class _InicialWidgetState extends State<InicialWidget> {
-  late InicialModel _model;
+class _InicialCopy2WidgetState extends State<InicialCopy2Widget> {
+  late InicialCopy2Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => InicialModel());
+    _model = createModel(context, () => InicialCopy2Model());
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
@@ -100,7 +100,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                       Expanded(
                         child: Text(
                           FFLocalizations.of(context).getText(
-                            '899y2kmb' /* Bem vindo, usuário */,
+                            'pvwjgbcc' /* Bem vindo, usuário */,
                           ),
                           style: FlutterFlowTheme.of(context)
                               .headlineMedium
@@ -201,7 +201,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                             labelText:
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                              '8i36ce6h' /* Procure em suas listas... */,
+                                              'yybpghov' /* Procure em suas listas... */,
                                             ),
                                             labelStyle: FlutterFlowTheme.of(
                                                     context)
@@ -292,7 +292,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                               16.0, 16.0, 0.0, 0.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
-                              'qxkzh21q' /* Listas marcadas */,
+                              '7a5qjc0w' /* Listas marcadas */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .labelMedium
@@ -373,7 +373,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 0.0, 5.0, 7.0),
+                                                  0.0, 0.0, 0.0, 10.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
@@ -524,7 +524,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                               16.0, 16.0, 0.0, 12.0),
                           child: Text(
                             FFLocalizations.of(context).getText(
-                              'hzac5n3n' /* Todas as listas */,
+                              '2v0z3yyc' /* Todas as listas */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .labelMedium
@@ -593,7 +593,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                'wgipnnco' /* Lorem ipsum dolor sit amet, co... */,
+                                                'wtqycfcq' /* Lorem ipsum dolor sit amet, co... */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -633,7 +633,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                    'ujzuq6ts' /* Lista 1 */,
+                                                    '5ktdxabu' /* Lista 1 */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -691,7 +691,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                'uw7zjwkc' /* Lorem ipsum dolor sit amet, co... */,
+                                                '709ektxl' /* Lorem ipsum dolor sit amet, co... */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -731,7 +731,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                    'ni4isffa' /* Lista 1 */,
+                                                    'vmf3fct1' /* Lista 1 */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -789,7 +789,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                '2drlokl1' /* Lorem ipsum dolor sit amet, co... */,
+                                                'n87d5215' /* Lorem ipsum dolor sit amet, co... */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -829,7 +829,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                    'gwunz5nk' /* Lista 1 */,
+                                                    'zqr0rfon' /* Lista 1 */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -887,7 +887,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                'uwg3054e' /* Lorem ipsum dolor sit amet, co... */,
+                                                'bkojde3p' /* Lorem ipsum dolor sit amet, co... */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -927,7 +927,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                    '84dr11dn' /* Lista 1 */,
+                                                    'u4ck1apk' /* Lista 1 */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -985,7 +985,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                'g50e77ag' /* Lorem ipsum dolor sit amet, co... */,
+                                                'oqrzyaym' /* Lorem ipsum dolor sit amet, co... */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -1025,7 +1025,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                    'd4ir34ov' /* Lista 1 */,
+                                                    'pvhecnia' /* Lista 1 */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -1083,7 +1083,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                'z2ndc126' /* Lorem ipsum dolor sit amet, co... */,
+                                                '1qpuvks1' /* Lorem ipsum dolor sit amet, co... */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -1123,7 +1123,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                 child: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                    's0n8i4x6' /* Lista 1 */,
+                                                    '8m2m6ar4' /* Lista 1 */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)

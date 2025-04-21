@@ -6,28 +6,28 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
-import 'configurcao_model.dart';
-export 'configurcao_model.dart';
+import 'configuracao_model.dart';
+export 'configuracao_model.dart';
 
-class ConfigurcaoWidget extends StatefulWidget {
-  const ConfigurcaoWidget({super.key});
+class ConfiguracaoWidget extends StatefulWidget {
+  const ConfiguracaoWidget({super.key});
 
-  static String routeName = 'Configurcao';
-  static String routePath = '/configurcao';
+  static String routeName = 'Configuracao';
+  static String routePath = '/configuracao';
 
   @override
-  State<ConfigurcaoWidget> createState() => _ConfigurcaoWidgetState();
+  State<ConfiguracaoWidget> createState() => _ConfiguracaoWidgetState();
 }
 
-class _ConfigurcaoWidgetState extends State<ConfigurcaoWidget> {
-  late ConfigurcaoModel _model;
+class _ConfiguracaoWidgetState extends State<ConfiguracaoWidget> {
+  late ConfiguracaoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ConfigurcaoModel());
+    _model = createModel(context, () => ConfiguracaoModel());
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();

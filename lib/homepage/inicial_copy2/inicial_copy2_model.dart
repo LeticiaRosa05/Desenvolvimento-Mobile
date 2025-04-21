@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 'configurcao_widget.dart' show ConfigurcaoWidget;
+import 'inicial_copy2_widget.dart' show InicialCopy2Widget;
 import 'package:flutter/material.dart';
 
-class ConfigurcaoModel extends FlutterFlowModel<ConfigurcaoWidget> {
+class InicialCopy2Model extends FlutterFlowModel<InicialCopy2Widget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.
