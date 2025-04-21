@@ -210,7 +210,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Home',
     },
   },
-  // Configurcao
+  // Configuracao
   {
     'j4s7inj5': {
       'pt': 'Nome usuário',
@@ -263,6 +263,68 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Procure em suas listas...',
       'en': '',
     },
+    'qxkzh21q': {
+      'pt': 'Listas marcadas',
+      'en': '',
+    },
+    'hzac5n3n': {
+      'pt': 'Todas as listas',
+      'en': '',
+    },
+    'wgipnnco': {
+      'pt':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
+      'en': '',
+    },
+    'ujzuq6ts': {
+      'pt': 'Lista 1',
+      'en': '',
+    },
+    'uw7zjwkc': {
+      'pt':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
+      'en': '',
+    },
+    'ni4isffa': {
+      'pt': 'Lista 1',
+      'en': '',
+    },
+    '2drlokl1': {
+      'pt':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
+      'en': '',
+    },
+    'gwunz5nk': {
+      'pt': 'Lista 1',
+      'en': '',
+    },
+    'uwg3054e': {
+      'pt':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
+      'en': '',
+    },
+    '84dr11dn': {
+      'pt': 'Lista 1',
+      'en': '',
+    },
+    'g50e77ag': {
+      'pt':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
+      'en': '',
+    },
+    'd4ir34ov': {
+      'pt': 'Lista 1',
+      'en': '',
+    },
+    'z2ndc126': {
+      'pt':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
+      'en': '',
+    },
+    's0n8i4x6': {
+      'pt': 'Lista 1',
+      'en': '',
+    },
     'zm9ekyk5': {
       'pt': 'Home',
       'en': '',
@@ -279,6 +341,42 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Start writing:',
     },
     'h4pw3uqz': {
+      'pt': 'Home',
+      'en': 'Home',
+    },
+  },
+  // Recuperar_conta
+  {
+    'oxcam4xr': {
+      'pt': 'Back',
+      'en': '',
+    },
+    '04deesm3': {
+      'pt': 'Recuperar conta',
+      'en': '',
+    },
+    'j6e4nmxs': {
+      'pt':
+          'Te enviaremos um email com um link para resetar sua senha, por favor escreva o email associado à sua conta abaixo.',
+      'en': '',
+    },
+    'o467zu1q': {
+      'pt': 'Seu endereço de email...',
+      'en': '',
+    },
+    'ybr52sgc': {
+      'pt': 'Escreva seu email...',
+      'en': '',
+    },
+    'jbcuaf3v': {
+      'pt': 'Enviar Link',
+      'en': '',
+    },
+    'izqiyb53': {
+      'pt': 'Voltar',
+      'en': '',
+    },
+    'xrgjsadq': {
       'pt': 'Home',
       'en': 'Home',
     },

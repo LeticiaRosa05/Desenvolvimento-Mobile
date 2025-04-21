@@ -142,7 +142,7 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                   width: 100.0,
                   height: double.infinity,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
                   ),
                   alignment: AlignmentDirectional(0.0, -1.0),
                   child: SingleChildScrollView(
@@ -177,7 +177,8 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                             maxWidth: 602.0,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                           ),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
@@ -188,8 +189,11 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                   alignment: Alignment(-1.0, 0),
                                   child: TabBar(
                                     isScrollable: true,
-                                    labelColor: Color(0xFF101213),
-                                    unselectedLabelColor: Color(0xFF57636C),
+                                    labelColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    unselectedLabelColor:
+                                        FlutterFlowTheme.of(context)
+                                            .secondaryText,
                                     labelPadding: EdgeInsets.all(16.0),
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .displaySmall
@@ -320,7 +324,7 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                         borderSide: BorderSide(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .accent1,
+                                                              .alternate,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -443,7 +447,7 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                         borderSide: BorderSide(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .accent1,
+                                                              .alternate,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -624,6 +628,18 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               40.0),
+                                                      hoverColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .accent4,
+                                                      hoverBorderSide:
+                                                          BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        width: 1.0,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -638,7 +654,8 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                   child: FFButtonWidget(
                                                     onPressed: () async {
                                                       context.pushNamed(
-                                                          LogoWidget.routeName);
+                                                          RecuperarContaWidget
+                                                              .routeName);
                                                     },
                                                     text: FFLocalizations.of(
                                                             context)
@@ -1167,8 +1184,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       enabledBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFE0E3E7),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -1178,8 +1196,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       focusedBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFF4B39EF),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .accent3,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -1189,8 +1208,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       errorBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFFF5963),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -1200,8 +1220,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                       focusedErrorBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
-                                                          color:
-                                                              Color(0xFFFF5963),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -1209,7 +1230,10 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                                 .circular(40.0),
                                                       ),
                                                       filled: true,
-                                                      fillColor: Colors.white,
+                                                      fillColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBackground,
                                                       contentPadding:
                                                           EdgeInsets.all(24.0),
                                                       suffixIcon: InkWell(
@@ -1229,8 +1253,9 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                                   .visibility_outlined
                                                               : Icons
                                                                   .visibility_off_outlined,
-                                                          color:
-                                                              Color(0xFF57636C),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
                                                           size: 24.0,
                                                         ),
                                                       ),
@@ -1267,114 +1292,155 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 16.0),
-                                                  child: FFButtonWidget(
-                                                    onPressed: () async {
-                                                      GoRouter.of(context)
-                                                          .prepareAuthEvent();
-                                                      if (_model
-                                                              .senhaCadastroTextController
-                                                              .text !=
-                                                          _model
-                                                              .confirmarSenhaTextController
-                                                              .text) {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                          SnackBar(
-                                                            content: Text(
-                                                              'Passwords don\'t match!',
+                                                  child: FutureBuilder<
+                                                      List<UsersRecord>>(
+                                                    future:
+                                                        queryUsersRecordOnce(
+                                                      queryBuilder:
+                                                          (usersRecord) =>
+                                                              usersRecord.where(
+                                                        'email',
+                                                        isEqualTo:
+                                                            currentUserEmail,
+                                                      ),
+                                                      limit: 1,
+                                                    ),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              valueColor:
+                                                                  AlwaysStoppedAnimation<
+                                                                      Color>(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                              ),
                                                             ),
                                                           ),
                                                         );
-                                                        return;
                                                       }
+                                                      List<UsersRecord>
+                                                          buttonUsersRecordList =
+                                                          snapshot.data!;
 
-                                                      final user = await authManager
-                                                          .createAccountWithEmail(
-                                                        context,
-                                                        _model
-                                                            .nomeUsuarioTextController
-                                                            .text,
-                                                        _model
-                                                            .senhaCadastroTextController
-                                                            .text,
-                                                      );
-                                                      if (user == null) {
-                                                        return;
-                                                      }
-
-                                                      await UsersRecord
-                                                          .collection
-                                                          .doc(user.uid)
-                                                          .update(
-                                                              createUsersRecordData(
-                                                            email: _model
-                                                                .nomeUsuarioTextController
-                                                                .text,
-                                                            displayName: _model
-                                                                .nomeUsuarioTextController
-                                                                .text,
-                                                            createdTime:
-                                                                getCurrentTimestamp,
-                                                          ));
-
-                                                      context.goNamedAuth(
-                                                          InicialWidget
-                                                              .routeName,
-                                                          context.mounted);
-                                                    },
-                                                    text: FFLocalizations.of(
-                                                            context)
-                                                        .getText(
-                                                      'c0vdlzxb' /* Criar Conta */,
-                                                    ),
-                                                    options: FFButtonOptions(
-                                                      width: 230.0,
-                                                      height: 52.0,
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      iconPadding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Plus Jakarta Sans',
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 16.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
+                                                      return FFButtonWidget(
+                                                        onPressed: () async {
+                                                          GoRouter.of(context)
+                                                              .prepareAuthEvent();
+                                                          if (_model
+                                                                  .senhaCadastroTextController
+                                                                  .text !=
+                                                              _model
+                                                                  .confirmarSenhaTextController
+                                                                  .text) {
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  'Passwords don\'t match!',
+                                                                ),
                                                               ),
-                                                      elevation: 3.0,
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              40.0),
-                                                    ),
+                                                            );
+                                                            return;
+                                                          }
+
+                                                          final user =
+                                                              await authManager
+                                                                  .createAccountWithEmail(
+                                                            context,
+                                                            _model
+                                                                .nomeUsuarioTextController
+                                                                .text,
+                                                            _model
+                                                                .senhaCadastroTextController
+                                                                .text,
+                                                          );
+                                                          if (user == null) {
+                                                            return;
+                                                          }
+
+                                                          context.goNamedAuth(
+                                                              InicialWidget
+                                                                  .routeName,
+                                                              context.mounted);
+                                                        },
+                                                        text:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                          'c0vdlzxb' /* Criar Conta */,
+                                                        ),
+                                                        options:
+                                                            FFButtonOptions(
+                                                          width: 230.0,
+                                                          height: 52.0,
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          iconPadding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Plus Jakarta Sans',
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        16.0,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
+                                                          elevation: 3.0,
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Colors
+                                                                .transparent,
+                                                            width: 1.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      40.0),
+                                                          hoverColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .accent4,
+                                                          hoverBorderSide:
+                                                              BorderSide(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primary,
+                                                            width: 1.0,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
                                                   ),
                                                 ),
                                               ),

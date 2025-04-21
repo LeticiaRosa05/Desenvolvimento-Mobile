@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
@@ -95,9 +94,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginSingUpWidget(),
         ),
         FFRoute(
-          name: ConfigurcaoWidget.routeName,
-          path: ConfigurcaoWidget.routePath,
-          builder: (context, params) => ConfigurcaoWidget(),
+          name: ConfiguracaoWidget.routeName,
+          path: ConfiguracaoWidget.routePath,
+          builder: (context, params) => ConfiguracaoWidget(),
         ),
         FFRoute(
           name: InicialWidget.routeName,
@@ -107,7 +106,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: ListaWidget.routeName,
           path: ListaWidget.routePath,
-          builder: (context, params) => ListaWidget(),
+          builder: (context, params) => ListaWidget(
+            titulo: params.getParam(
+              'titulo',
+              ParamType.String,
+            ),
+            corpo: params.getParam(
+              'corpo',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: RecuperarContaWidget.routeName,
+          path: RecuperarContaWidget.routePath,
+          builder: (context, params) => RecuperarContaWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -292,15 +305,11 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
-                    ),
+              ? Container(
+                  color: Colors.transparent,
+                  child: Image.asset(
+                    'assets/images/Minimal-Logo-Reveal_free_Black.gif',
+                    fit: BoxFit.cover,
                   ),
                 )
               : page;
