@@ -345,45 +345,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Home',
     },
   },
-  // inicialCopy
-  {
-    'nb4a2qkn': {
-      'pt': 'Bem vindo, usuário',
-      'en': '',
-    },
-    'cg0kinfy': {
-      'pt': 'Procure em suas listas...',
-      'en': '',
-    },
-    'wnwf5dmu': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi...',
-      'en': '',
-    },
-    'wfw5q9hq': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
-    'r2a8ukay': {
-      'pt': 'Home',
-      'en': '',
-    },
-  },
-  // listaCopy
-  {
-    'ps5hjpn7': {
-      'pt': 'Titulo:',
-      'en': '',
-    },
-    'ksnxk6ud': {
-      'pt': 'Comece a escrever:',
-      'en': '',
-    },
-    'chgjogy2': {
-      'pt': 'Home',
-      'en': 'Home',
-    },
-  },
   // Recuperar_conta
   {
     'oxcam4xr': {
@@ -418,83 +379,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'xrgjsadq': {
       'pt': 'Home',
       'en': 'Home',
-    },
-  },
-  // inicialCopy2
-  {
-    'pvwjgbcc': {
-      'pt': 'Bem vindo, usuário',
-      'en': '',
-    },
-    'yybpghov': {
-      'pt': 'Procure em suas listas...',
-      'en': '',
-    },
-    '7a5qjc0w': {
-      'pt': 'Listas marcadas',
-      'en': '',
-    },
-    '2v0z3yyc': {
-      'pt': 'Todas as listas',
-      'en': '',
-    },
-    'wtqycfcq': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
-      'en': '',
-    },
-    '5ktdxabu': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
-    '709ektxl': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
-      'en': '',
-    },
-    'vmf3fct1': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
-    'n87d5215': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
-      'en': '',
-    },
-    'zqr0rfon': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
-    'bkojde3p': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
-      'en': '',
-    },
-    'u4ck1apk': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
-    'oqrzyaym': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
-      'en': '',
-    },
-    'pvhecnia': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
-    '1qpuvks1': {
-      'pt':
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidiun lorem adipicing sedatir...',
-      'en': '',
-    },
-    '8m2m6ar4': {
-      'pt': 'Lista 1',
-      'en': '',
-    },
-    'sbm62wkc': {
-      'pt': 'Home',
-      'en': '',
     },
   },
   // Miscellaneous

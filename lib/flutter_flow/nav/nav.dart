@@ -118,38 +118,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: InicialCopyWidget.routeName,
-          path: InicialCopyWidget.routePath,
-          builder: (context, params) => InicialCopyWidget(
-            notaRef: params.getParam(
-              'notaRef',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['lists'],
-            ),
-          ),
-        ),
-        FFRoute(
-          name: ListaCopyWidget.routeName,
-          path: ListaCopyWidget.routePath,
-          builder: (context, params) => ListaCopyWidget(
-            notaRef: params.getParam(
-              'notaRef',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['lists'],
-            ),
-          ),
-        ),
-        FFRoute(
           name: RecuperarContaWidget.routeName,
           path: RecuperarContaWidget.routePath,
           builder: (context, params) => RecuperarContaWidget(),
-        ),
-        FFRoute(
-          name: InicialCopy2Widget.routeName,
-          path: InicialCopy2Widget.routePath,
-          builder: (context, params) => InicialCopy2Widget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

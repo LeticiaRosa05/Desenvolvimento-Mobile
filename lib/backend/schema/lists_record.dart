@@ -30,10 +30,16 @@ class ListsRecord extends FirestoreRecord {
   String get content => _content ?? '';
   bool hasContent() => _content != null;
 
+  // "marked" field.
+  bool? _marked;
+  bool get marked => _marked ?? false;
+  bool hasMarked() => _marked != null;
+
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _createdBy = snapshotData['created_by'] as DocumentReference?;
     _content = snapshotData['content'] as String?;
+    _marked = snapshotData['marked'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -73,12 +79,14 @@ Map<String, dynamic> createListsRecordData({
   String? title,
   DocumentReference? createdBy,
   String? content,
+  bool? marked,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'title': title,
       'created_by': createdBy,
       'content': content,
+      'marked': marked,
     }.withoutNulls,
   );
 
@@ -92,12 +100,13 @@ class ListsRecordDocumentEquality implements Equality<ListsRecord> {
   bool equals(ListsRecord? e1, ListsRecord? e2) {
     return e1?.title == e2?.title &&
         e1?.createdBy == e2?.createdBy &&
-        e1?.content == e2?.content;
+        e1?.content == e2?.content &&
+        e1?.marked == e2?.marked;
   }
 
   @override
-  int hash(ListsRecord? e) =>
-      const ListEquality().hash([e?.title, e?.createdBy, e?.content]);
+  int hash(ListsRecord? e) => const ListEquality()
+      .hash([e?.title, e?.createdBy, e?.content, e?.marked]);
 
   @override
   bool isValidKey(Object? o) => o is ListsRecord;
