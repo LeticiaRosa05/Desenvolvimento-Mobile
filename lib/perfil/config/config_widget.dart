@@ -1,33 +1,41 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_language_selector.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'configuracao_model.dart';
-export 'configuracao_model.dart';
+import 'config_model.dart';
+export 'config_model.dart';
 
-class ConfiguracaoWidget extends StatefulWidget {
-  const ConfiguracaoWidget({super.key});
+class ConfigWidget extends StatefulWidget {
+  const ConfigWidget({
+    super.key,
+    this.nomeUsuario,
+  });
 
-  static String routeName = 'Configuracao';
-  static String routePath = '/configuracao';
+  final DocumentReference? nomeUsuario;
+
+  static String routeName = 'Config';
+  static String routePath = '/config';
 
   @override
-  State<ConfiguracaoWidget> createState() => _ConfiguracaoWidgetState();
+  State<ConfigWidget> createState() => _ConfigWidgetState();
 }
 
-class _ConfiguracaoWidgetState extends State<ConfiguracaoWidget> {
-  late ConfiguracaoModel _model;
+class _ConfigWidgetState extends State<ConfigWidget> {
+  late ConfigModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ConfiguracaoModel());
+    _model = createModel(context, () => ConfigModel());
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
@@ -135,20 +143,47 @@ class _ConfiguracaoWidgetState extends State<ConfiguracaoWidget> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    'j4s7inj5' /* Nome usuário */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineSmall
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        fontSize: 24.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
+                                StreamBuilder<UsersRecord>(
+                                  stream: UsersRecord.getDocument(
+                                      widget.nomeUsuario!),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+
+                                    final textUsersRecord = snapshot.data!;
+
+                                    return AutoSizeText(
+                                      textUsersRecord.displayName
+                                          .maybeHandleOverflow(
+                                        maxChars: 15,
+                                        replacement: '…',
                                       ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .headlineSmall
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 24.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    );
+                                  },
                                 ),
                               ],
                             ),
@@ -452,46 +487,51 @@ class _ConfiguracaoWidgetState extends State<ConfiguracaoWidget> {
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional(0.0, -1.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 12.0, 0.0, 12.0),
-                        child: Text(
-                          FFLocalizations.of(context).getText(
-                            'dn2bhpkh' /* Condiguração da conta */,
-                          ),
-                          style: FlutterFlowTheme.of(context)
-                              .labelLarge
-                              .override(
-                                fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                letterSpacing: 0.0,
-                              ),
-                        ),
-                      ),
-                    ),
-                    if (Theme.of(context).brightness == Brightness.light)
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          setDarkModeSetting(context, ThemeMode.dark);
-                        },
-                        child: Container(
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
+                alignment: AlignmentDirectional(-1.0, 0.0),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional(0.0, -1.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 12.0, 0.0, 12.0),
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              'dn2bhpkh' /* Condiguração da conta */,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .labelLarge
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                         ),
                       ),
-                  ],
+                      if (Theme.of(context).brightness == Brightness.light)
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            setDarkModeSetting(context, ThemeMode.dark);
+                          },
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
               Row(
@@ -534,6 +574,20 @@ class _ConfiguracaoWidgetState extends State<ConfiguracaoWidget> {
                                   child: TextFormField(
                                     controller: _model.textController,
                                     focusNode: _model.textFieldFocusNode,
+                                    onFieldSubmitted: (_) async {
+                                      await currentUserReference!
+                                          .update(createUsersRecordData(
+                                        displayName: _model.textController.text,
+                                      ));
+                                      await queryUsersRecordOnce(
+                                        queryBuilder: (usersRecord) =>
+                                            usersRecord.where(
+                                          'display_name',
+                                          isEqualTo: widget.nomeUsuario?.id,
+                                        ),
+                                        singleRecord: true,
+                                      ).then((s) => s.firstOrNull);
+                                    },
                                     autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -646,11 +700,42 @@ class _ConfiguracaoWidgetState extends State<ConfiguracaoWidget> {
                                   alignment: AlignmentDirectional(0.0, 1.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      await authManager.deleteUser(context);
+                                      var confirmDialogResponse =
+                                          await showDialog<bool>(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title:
+                                                        Text('Deletar Conta'),
+                                                    content: Text(
+                                                        'Realmente deseja deletar sua conta?'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                false),
+                                                        child: Text('Cancelar'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                true),
+                                                        child:
+                                                            Text('Confirmar'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              ) ??
+                                              false;
+                                      if (confirmDialogResponse) {
+                                        await authManager.deleteUser(context);
 
-                                      context.goNamedAuth(
-                                          InicialWidget.routeName,
-                                          context.mounted);
+                                        context.pushNamed(
+                                            LoginSingUpWidget.routeName);
+                                      }
                                     },
                                     text: FFLocalizations.of(context).getText(
                                       '84q4dv87' /* Deletar conta */,

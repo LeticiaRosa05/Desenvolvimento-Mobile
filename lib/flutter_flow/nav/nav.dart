@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
@@ -94,14 +95,27 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginSingUpWidget(),
         ),
         FFRoute(
-          name: ConfiguracaoWidget.routeName,
-          path: ConfiguracaoWidget.routePath,
-          builder: (context, params) => ConfiguracaoWidget(),
+          name: ConfigWidget.routeName,
+          path: ConfigWidget.routePath,
+          builder: (context, params) => ConfigWidget(
+            nomeUsuario: params.getParam(
+              'nomeUsuario',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['users'],
+            ),
+          ),
         ),
         FFRoute(
           name: InicialWidget.routeName,
           path: InicialWidget.routePath,
-          builder: (context, params) => InicialWidget(),
+          builder: (context, params) => InicialWidget(
+            selectedLists: params.getParam<String>(
+              'selectedLists',
+              ParamType.String,
+              isList: true,
+            ),
+          ),
         ),
         FFRoute(
           name: ListaWidget.routeName,
@@ -114,6 +128,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             corpo: params.getParam(
               'corpo',
               ParamType.String,
+            ),
+            referenceDocument: params.getParam(
+              'referenceDocument',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['lists'],
             ),
           ),
         ),
@@ -306,9 +326,9 @@ class FFRoute {
               : builder(context, ffParams);
           final child = appStateNotifier.loading
               ? Container(
-                  color: Colors.transparent,
+                  color: FlutterFlowTheme.of(context).primaryText,
                   child: Image.asset(
-                    'assets/images/Minimal-Logo-Reveal_free_Black.gif',
+                    'assets/images/Swift-Glitch-Logo_free_White-Escrito-_online-video-cutter.com_-_1_.gif',
                     fit: BoxFit.cover,
                   ),
                 )

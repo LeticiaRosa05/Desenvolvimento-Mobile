@@ -69,13 +69,13 @@ class _MyAppState extends State<MyApp> {
 
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
-    userStream = listLink2FirebaseUserStream()
+    userStream = listLinkFirebaseUserStream()
       ..listen((user) {
         _appStateNotifier.update(user);
       });
     jwtTokenStream.listen((_) {});
     Future.delayed(
-      Duration(milliseconds: 1000),
+      Duration(milliseconds: 4000),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
   }
@@ -100,7 +100,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'ListLink2',
+      title: 'ListLink',
       localizationsDelegates: [
         FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,

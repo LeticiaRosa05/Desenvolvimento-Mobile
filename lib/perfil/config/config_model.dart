@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
-import 'configuracao_widget.dart' show ConfiguracaoWidget;
+import 'config_widget.dart' show ConfigWidget;
 import 'package:flutter/material.dart';
 
-class ConfiguracaoModel extends FlutterFlowModel<ConfiguracaoWidget> {
+class ConfigModel extends FlutterFlowModel<ConfigWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.
