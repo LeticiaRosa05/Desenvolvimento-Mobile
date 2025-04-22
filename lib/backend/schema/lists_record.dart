@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
+import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -35,11 +36,17 @@ class ListsRecord extends FirestoreRecord {
   bool get marked => _marked ?? false;
   bool hasMarked() => _marked != null;
 
+  // "usuariosPermitidos" field.
+  List<String>? _usuariosPermitidos;
+  List<String> get usuariosPermitidos => _usuariosPermitidos ?? const [];
+  bool hasUsuariosPermitidos() => _usuariosPermitidos != null;
+
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _createdBy = snapshotData['created_by'] as DocumentReference?;
     _content = snapshotData['content'] as String?;
     _marked = snapshotData['marked'] as bool?;
+    _usuariosPermitidos = getDataList(snapshotData['usuariosPermitidos']);
   }
 
   static CollectionReference get collection =>
@@ -98,15 +105,17 @@ class ListsRecordDocumentEquality implements Equality<ListsRecord> {
 
   @override
   bool equals(ListsRecord? e1, ListsRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.title == e2?.title &&
         e1?.createdBy == e2?.createdBy &&
         e1?.content == e2?.content &&
-        e1?.marked == e2?.marked;
+        e1?.marked == e2?.marked &&
+        listEquality.equals(e1?.usuariosPermitidos, e2?.usuariosPermitidos);
   }
 
   @override
-  int hash(ListsRecord? e) => const ListEquality()
-      .hash([e?.title, e?.createdBy, e?.content, e?.marked]);
+  int hash(ListsRecord? e) => const ListEquality().hash(
+      [e?.title, e?.createdBy, e?.content, e?.marked, e?.usuariosPermitidos]);
 
   @override
   bool isValidKey(Object? o) => o is ListsRecord;

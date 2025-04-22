@@ -14,10 +14,6 @@ class ListaModel extends FlutterFlowModel<ListaWidget> {
   FocusNode? campoTextoFocusNode;
   TextEditingController? campoTextoTextController;
   String? Function(BuildContext, String?)? campoTextoTextControllerValidator;
-  // State field(s) for user widget.
-  bool userHovered = false;
-  // State field(s) for MouseRegion widget.
-  bool mouseRegionHovered = false;
 
   @override
   void initState(BuildContext context) {}

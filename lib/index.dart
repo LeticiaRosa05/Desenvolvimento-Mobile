@@ -6,3 +6,4 @@ export '/homepage/inicial/inicial_widget.dart' show InicialWidget;
 export '/homepage/lista/lista_widget.dart' show ListaWidget;
 export '/launch/recuperar_conta/recuperar_conta_widget.dart'
     show RecuperarContaWidget;
+export '/homepage/add_user/add_user_widget.dart' show AddUserWidget;

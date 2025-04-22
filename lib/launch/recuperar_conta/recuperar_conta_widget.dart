@@ -10,7 +10,7 @@ export 'recuperar_conta_model.dart';
 class RecuperarContaWidget extends StatefulWidget {
   const RecuperarContaWidget({super.key});
 
-  static String routeName = 'Recuperar_conta';
+  static String routeName = 'recuperarConta';
   static String routePath = '/recuperarConta';
 
   @override

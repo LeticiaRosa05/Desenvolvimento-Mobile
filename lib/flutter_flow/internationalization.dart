@@ -253,7 +253,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     '899y2kmb': {
       'pt': 'Bem vindo, ',
-      'en': 'Welcome,',
+      'en': 'Welcome, ',
     },
     '8i36ce6h': {
       'pt': 'Procure em suas listas...',
@@ -303,7 +303,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Home',
     },
   },
-  // Recuperar_conta
+  // recuperarConta
   {
     'oxcam4xr': {
       'pt': 'Back',
@@ -338,6 +338,29 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'ww9xyzrv': {
       'pt': 'Home',
       'en': 'Home',
+    },
+  },
+  // addUser
+  {
+    'r9yew1ki': {
+      'pt': 'Find Users',
+      'en': '',
+    },
+    'm4uioewz': {
+      'pt': 'Search for users by email address',
+      'en': '',
+    },
+    'hvsut5bl': {
+      'pt': 'Enter email address',
+      'en': '',
+    },
+    'l5r85qe8': {
+      'pt': 'Search',
+      'en': '',
+    },
+    'g4wt5ry0': {
+      'pt': 'Add',
+      'en': '',
     },
   },
   // Miscellaneous

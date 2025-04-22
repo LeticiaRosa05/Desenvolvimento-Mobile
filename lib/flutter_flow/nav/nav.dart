@@ -141,6 +141,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: RecuperarContaWidget.routeName,
           path: RecuperarContaWidget.routePath,
           builder: (context, params) => RecuperarContaWidget(),
+        ),
+        FFRoute(
+          name: AddUserWidget.routeName,
+          path: AddUserWidget.routePath,
+          builder: (context, params) => AddUserWidget(
+            listRef: params.getParam(
+              'listRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['lists'],
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
