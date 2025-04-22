@@ -470,7 +470,16 @@ class _ListaWidgetState extends State<ListaWidget>
                                             _model.mouseRegionHovered = true);
                                         await queryUsersRecordOnce(
                                           queryBuilder: (usersRecord) =>
-                                              usersRecord,
+                                              usersRecord
+                                                  .where(
+                                                    'display_name',
+                                                    isEqualTo:
+                                                        currentUserDisplayName,
+                                                  )
+                                                  .where(
+                                                    'email',
+                                                    isEqualTo: currentUserEmail,
+                                                  ),
                                           singleRecord: true,
                                         ).then((s) => s.firstOrNull);
                                       }),
