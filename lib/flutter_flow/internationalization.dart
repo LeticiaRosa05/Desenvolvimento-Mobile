@@ -155,7 +155,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     's1redc8l': {
       'pt': 'Entrar',
-      'en': 'To enter',
+      'en': 'Login',
     },
     '2g3qo903': {
       'pt': 'Já tem uma conta? Faça login abaixo:',
@@ -171,7 +171,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'xcsbs0dv': {
       'pt': 'Entrar',
-      'en': 'To enter',
+      'en': 'Login',
     },
     '5h04zhjp': {
       'pt': 'Esqueci minha senha',
@@ -179,7 +179,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'f3ur3fcy': {
       'pt': 'Cadastro',
-      'en': 'Register',
+      'en': 'Sign Up',
     },
     'p79jyqha': {
       'pt': 'Ainda não tem uma conta? Por favor, preencha os campos:',
@@ -238,7 +238,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'vi73dhok': {
       'pt': 'Sair',
-      'en': 'To go out',
+      'en': 'Log out',
     },
     'dnkhe2wl': {
       'pt': 'Meus dados',
