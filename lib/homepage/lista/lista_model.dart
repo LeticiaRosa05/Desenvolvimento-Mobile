@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'lista_widget.dart' show ListaWidget;
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 class ListaModel extends FlutterFlowModel<ListaWidget> {
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Backend Call - Create Document] action in IconButton widget.
+  ListsRecord? itemNew;
   // State field(s) for Titulo widget.
   FocusNode? tituloFocusNode;
   TextEditingController? tituloTextController;
@@ -14,10 +17,6 @@ class ListaModel extends FlutterFlowModel<ListaWidget> {
   FocusNode? campoTextoFocusNode;
   TextEditingController? campoTextoTextController;
   String? Function(BuildContext, String?)? campoTextoTextControllerValidator;
-  // State field(s) for user widget.
-  bool userHovered = false;
-  // State field(s) for MouseRegion widget.
-  bool mouseRegionHovered = false;
 
   @override
   void initState(BuildContext context) {}
