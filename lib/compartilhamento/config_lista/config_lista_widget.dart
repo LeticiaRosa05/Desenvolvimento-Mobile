@@ -337,12 +337,16 @@ class _ConfigListaWidgetState extends State<ConfigListaWidget> {
                                         context.pushNamed(
                                           AddUserWidget.routeName,
                                           queryParameters: {
-                                            'email': serializeParam(
+                                            'textoPesquisa': serializeParam(
                                               '',
                                               ParamType.String,
                                             ),
                                             'nomeUsuario': serializeParam(
                                               '',
+                                              ParamType.String,
+                                            ),
+                                            'listaRefEditando': serializeParam(
+                                              widget.listaRef?.id,
                                               ParamType.String,
                                             ),
                                           }.withoutNulls,
