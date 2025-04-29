@@ -100,41 +100,6 @@ class FFAppState extends ChangeNotifier {
     campo.insert(index, value);
     prefs.setStringList('ff_campo', _campo);
   }
-
-  List<String> _selectedLists = [];
-  List<String> get selectedLists => _selectedLists;
-  set selectedLists(List<String> value) {
-    _selectedLists = value;
-  }
-
-  void addToSelectedLists(String value) {
-    selectedLists.add(value);
-  }
-
-  void removeFromSelectedLists(String value) {
-    selectedLists.remove(value);
-  }
-
-  void removeAtIndexFromSelectedLists(int index) {
-    selectedLists.removeAt(index);
-  }
-
-  void updateSelectedListsAtIndex(
-    int index,
-    String Function(String) updateFn,
-  ) {
-    selectedLists[index] = updateFn(_selectedLists[index]);
-  }
-
-  void insertAtIndexInSelectedLists(int index, String value) {
-    selectedLists.insert(index, value);
-  }
-
-  bool _Pesquisa = false;
-  bool get Pesquisa => _Pesquisa;
-  set Pesquisa(bool value) {
-    _Pesquisa = value;
-  }
 }
 
 void _safeInit(Function() initializeField) {

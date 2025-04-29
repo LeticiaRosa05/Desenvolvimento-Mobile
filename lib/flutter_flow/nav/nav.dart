@@ -109,13 +109,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: InicialWidget.routeName,
           path: InicialWidget.routePath,
-          builder: (context, params) => InicialWidget(
-            selectedLists: params.getParam<String>(
-              'selectedLists',
-              ParamType.String,
-              isList: true,
-            ),
-          ),
+          builder: (context, params) => InicialWidget(),
         ),
         FFRoute(
           name: ListaWidget.routeName,
@@ -135,6 +129,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               isList: false,
               collectionNamePath: ['lists'],
             ),
+            nomeUsuario: params.getParam(
+              'nomeUsuario',
+              ParamType.String,
+            ),
+            email: params.getParam(
+              'email',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
@@ -146,8 +148,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: AddUserWidget.routeName,
           path: AddUserWidget.routePath,
           builder: (context, params) => AddUserWidget(
-            listRef: params.getParam(
-              'listRef',
+            email: params.getParam(
+              'email',
+              ParamType.String,
+            ),
+            nomeUsuario: params.getParam(
+              'nomeUsuario',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: ConfigListaWidget.routeName,
+          path: ConfigListaWidget.routePath,
+          builder: (context, params) => ConfigListaWidget(
+            listaRef: params.getParam(
+              'listaRef',
               ParamType.DocumentReference,
               isList: false,
               collectionNamePath: ['lists'],

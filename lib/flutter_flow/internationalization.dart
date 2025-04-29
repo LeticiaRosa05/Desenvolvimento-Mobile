@@ -162,7 +162,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Already have an account? Log in below:',
     },
     'a4i7bfog': {
-      'pt': 'Email',
+      'pt': 'E-mail',
       'en': 'E-mail',
     },
     'nw6zrolr': {
@@ -175,11 +175,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '5h04zhjp': {
       'pt': 'Esqueci minha senha',
-      'en': 'I forgot my password',
+      'en': 'Forgot password',
     },
     'f3ur3fcy': {
       'pt': 'Cadastro',
-      'en': 'Sign Up',
+      'en': 'Sign up',
     },
     'p79jyqha': {
       'pt': 'Ainda não tem uma conta? Por favor, preencha os campos:',
@@ -187,10 +187,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'fnuha20z': {
       'pt': 'Nome de Usuário',
-      'en': 'Username',
+      'en': 'User name',
     },
     '1x0gx5m6': {
-      'pt': 'Email',
+      'pt': 'E-mail',
       'en': 'E-mail',
     },
     'ldzny6c0': {
@@ -251,10 +251,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // inicial
   {
-    '899y2kmb': {
-      'pt': 'Bem vindo, ',
-      'en': 'Welcome, ',
-    },
     '8i36ce6h': {
       'pt': 'Procure em suas listas...',
       'en': 'Search your lists...',
@@ -282,58 +278,41 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Comece a escrever:',
       'en': 'Start writing:',
     },
-    'n0b3ttyn': {
-      'pt': 'Fechar aba',
-      'en': 'Close tab',
-    },
-    'cdm7mxsw': {
-      'pt': 'Deletar',
-      'en': 'Delete',
-    },
-    '6kaxyj91': {
-      'pt': 'Usuários nessa lista',
-      'en': '',
-    },
-    'o1bm1r81': {
-      'pt': 'Add user',
-      'en': '',
-    },
     '6jmfkdcu': {
       'pt': 'Home',
       'en': 'Home',
     },
   },
-  // recuperarConta
+  // Recuperar_conta
   {
     'oxcam4xr': {
       'pt': 'Back',
-      'en': 'Back',
+      'en': '',
     },
     '04deesm3': {
       'pt': 'Recuperar conta',
-      'en': 'Recover account',
+      'en': '',
     },
     'j6e4nmxs': {
       'pt':
           'Te enviaremos um email com um link para resetar sua senha, por favor escreva o email associado à sua conta abaixo.',
-      'en':
-          'We will send you an email with a link to reset your password, please enter the email associated with your account below.',
+      'en': '',
     },
     'o467zu1q': {
       'pt': 'Seu endereço de email...',
-      'en': 'Your email address...',
+      'en': '',
     },
     'ybr52sgc': {
       'pt': 'Escreva seu email...',
-      'en': 'Write your email...',
+      'en': '',
     },
     'jbcuaf3v': {
       'pt': 'Enviar Link',
-      'en': 'Send Link',
+      'en': '',
     },
     'izqiyb53': {
       'pt': 'Voltar',
-      'en': 'To go back',
+      'en': '',
     },
     'ww9xyzrv': {
       'pt': 'Home',
@@ -342,24 +321,43 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // addUser
   {
-    'r9yew1ki': {
-      'pt': 'Find Users',
+    'ogilanlp': {
+      'pt': 'Add Users',
       'en': '',
     },
-    'm4uioewz': {
-      'pt': 'Search for users by email address',
+    'vjjwnuol': {
+      'pt': 'Search by email address',
       'en': '',
     },
-    'hvsut5bl': {
-      'pt': 'Enter email address',
+    'ctj95aaq': {
+      'pt': 'Search Results',
       'en': '',
     },
-    'l5r85qe8': {
-      'pt': 'Search',
-      'en': '',
-    },
-    'g4wt5ry0': {
+    'yf6drp5x': {
       'pt': 'Add',
+      'en': '',
+    },
+  },
+  // ConfigLista
+  {
+    'xe5xctry': {
+      'pt': 'Usuários com acesso',
+      'en': '',
+    },
+    'yygclvmf': {
+      'pt': 'Add user',
+      'en': '',
+    },
+    'w4yxrsgs': {
+      'pt': 'Deletar a lista',
+      'en': '',
+    },
+    'phzhgrl3': {
+      'pt': 'Configurações da lista',
+      'en': '',
+    },
+    'q5vl02ma': {
+      'pt': 'Home',
       'en': '',
     },
   },

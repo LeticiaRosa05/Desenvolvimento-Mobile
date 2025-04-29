@@ -83,7 +83,6 @@ dependencies:
   sqflite_common: 2.5.4+3
   sticky_headers: 0.3.0+2
   stream_transform: 2.1.0
-  text_search: 1.0.1
   timeago: 3.6.1
   universal_io: 2.2.2
   url_launcher: 6.3.0
