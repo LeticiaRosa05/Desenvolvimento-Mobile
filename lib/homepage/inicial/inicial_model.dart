@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'inicial_widget.dart' show InicialWidget;
@@ -10,6 +11,7 @@ class InicialModel extends FlutterFlowModel<InicialWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  List<AccessRecord> simpleSearchResults = [];
 
   @override
   void initState(BuildContext context) {}

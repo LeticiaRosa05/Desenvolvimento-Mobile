@@ -71,126 +71,121 @@ class _ListaWidgetState extends State<ListaWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 80.0,
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              size: 30.0,
-            ),
-            onPressed: () async {
-              context.pushNamed(InicialWidget.routeName);
-            },
-          ),
-          title: Visibility(
-            visible: widget.referenceDocument?.id != null &&
-                widget.referenceDocument?.id != '',
-            child: Align(
-              alignment: AlignmentDirectional(1.0, 0.0),
-              child: FlutterFlowIconButton(
-                borderRadius: 8.0,
-                buttonSize: 40.0,
-                fillColor: FlutterFlowTheme.of(context).primary,
-                icon: Icon(
-                  Icons.check_sharp,
-                  size: 24.0,
-                ),
-                onPressed: () async {
-                  await widget.referenceDocument!.update(createListsRecordData(
-                    title: _model.tituloTextController.text,
-                    content: _model.campoTextoTextController.text,
-                  ));
-                },
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primary,
+            automaticallyImplyLeading: false,
+            leading: FlutterFlowIconButton(
+              borderRadius: 30.0,
+              borderWidth: 1.0,
+              buttonSize: 80.0,
+              icon: Icon(
+                Icons.arrow_back_rounded,
+                size: 30.0,
               ),
+              onPressed: () async {
+                context.pushNamed(InicialWidget.routeName);
+              },
             ),
-          ),
-          actions: [
-            Visibility(
-              visible: widget.referenceDocument?.id == null ||
-                  widget.referenceDocument?.id == '',
+            title: Visibility(
+              visible: widget.referenceDocument?.id != null &&
+                  widget.referenceDocument?.id != '',
               child: Align(
-                alignment: AlignmentDirectional(0.0, -1.0),
+                alignment: AlignmentDirectional(1.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderRadius: 8.0,
-                  borderWidth: 1.0,
-                  buttonSize: 80.0,
+                  buttonSize: 40.0,
+                  fillColor: FlutterFlowTheme.of(context).primary,
                   icon: Icon(
-                    Icons.add,
+                    Icons.check_sharp,
                     size: 24.0,
                   ),
                   onPressed: () async {
-                    var listsRecordReference = ListsRecord.collection.doc();
-                    await listsRecordReference.set(createListsRecordData(
+                    await widget.referenceDocument!
+                        .update(createListsRecordData(
                       title: _model.tituloTextController.text,
-                      createdBy: currentUserReference,
                       content: _model.campoTextoTextController.text,
-                      marked: false,
                     ));
-                    _model.itemNew = ListsRecord.getDocumentFromData(
-                        createListsRecordData(
-                          title: _model.tituloTextController.text,
-                          createdBy: currentUserReference,
-                          content: _model.campoTextoTextController.text,
-                          marked: false,
-                        ),
-                        listsRecordReference);
-
-                    await AccessRecord.collection
-                        .doc()
-                        .set(createAccessRecordData(
-                          email: currentUserEmail,
-                          username: currentUserDisplayName,
-                          lista: _model.itemNew?.reference.id,
-                          userID: currentUserUid,
-                        ));
-                    await showDialog(
-                      context: context,
-                      builder: (alertDialogContext) {
-                        return AlertDialog(
-                          title: Text('Sucesso'),
-                          content: Text('Criado com sucesso'),
-                          actions: [
-                            TextButton(
-                              onPressed: () =>
-                                  Navigator.pop(alertDialogContext),
-                              child: Text('Ok'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-
-                    safeSetState(() {});
                   },
                 ),
               ),
             ),
-            FlutterFlowIconButton(
-              borderRadius: 8.0,
-              buttonSize: 40.0,
-              icon: Icon(
-                Icons.more_vert,
-                size: 24.0,
-              ),
-              onPressed: () async {
-                context.pushNamed(
-                  ConfigListaWidget.routeName,
-                  queryParameters: {
-                    'listaRef': serializeParam(
-                      widget.referenceDocument,
-                      ParamType.DocumentReference,
+            actions: [
+              Visibility(
+                visible: widget.referenceDocument?.id == null ||
+                    widget.referenceDocument?.id == '',
+                child: Align(
+                  alignment: AlignmentDirectional(0.0, -1.0),
+                  child: FlutterFlowIconButton(
+                    borderRadius: 8.0,
+                    borderWidth: 1.0,
+                    buttonSize: 80.0,
+                    icon: Icon(
+                      Icons.add,
+                      size: 24.0,
                     ),
-                  }.withoutNulls,
-                );
-              },
-            ),
-          ],
-          centerTitle: false,
-          elevation: 0.0,
+                    onPressed: () async {
+                      var listsRecordReference = ListsRecord.collection.doc();
+                      await listsRecordReference.set(createListsRecordData(
+                        title: _model.tituloTextController.text,
+                        createdBy: currentUserReference,
+                        content: _model.campoTextoTextController.text,
+                        marked: false,
+                      ));
+                      _model.itemNew = ListsRecord.getDocumentFromData(
+                          createListsRecordData(
+                            title: _model.tituloTextController.text,
+                            createdBy: currentUserReference,
+                            content: _model.campoTextoTextController.text,
+                            marked: false,
+                          ),
+                          listsRecordReference);
+                      await showDialog(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('Sucesso'),
+                            content: Text('Criado com sucesso'),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext),
+                                child: Text('Ok'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+
+                      safeSetState(() {});
+                    },
+                  ),
+                ),
+              ),
+              FlutterFlowIconButton(
+                borderRadius: 8.0,
+                buttonSize: 40.0,
+                icon: Icon(
+                  Icons.more_vert,
+                  size: 24.0,
+                ),
+                onPressed: () async {
+                  context.pushNamed(
+                    ConfigListaWidget.routeName,
+                    queryParameters: {
+                      'listaRef': serializeParam(
+                        widget.referenceDocument,
+                        ParamType.DocumentReference,
+                      ),
+                    }.withoutNulls,
+                  );
+                },
+              ),
+            ],
+            centerTitle: false,
+            elevation: 0.0,
+          ),
         ),
         body: SafeArea(
           top: true,

@@ -340,6 +340,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // ConfigLista
   {
+    'amoanvqf': {
+      'pt': 'Configurações da lista',
+      'en': '',
+    },
     'xe5xctry': {
       'pt': 'Usuários com acesso',
       'en': '',
@@ -350,10 +354,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'w4yxrsgs': {
       'pt': 'Deletar a lista',
-      'en': '',
-    },
-    'phzhgrl3': {
-      'pt': 'Configurações da lista',
       'en': '',
     },
     'q5vl02ma': {
