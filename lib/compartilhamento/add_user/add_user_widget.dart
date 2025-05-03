@@ -328,7 +328,24 @@ class _AddUserWidgetState extends State<AddUserWidget> {
                                           username:
                                               resultadoPesquisaItem.displayName,
                                           lista: widget.listaRefEditando,
+                                          userID: resultadoPesquisaItem.uid,
                                         ));
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          content:
+                                              Text('Adicionado com sucesso'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
                                   },
                                   text: FFLocalizations.of(context).getText(
                                     'yf6drp5x' /* Add */,

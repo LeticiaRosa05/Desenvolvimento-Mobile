@@ -145,6 +145,7 @@ class _ListaWidgetState extends State<ListaWidget> {
                           email: currentUserEmail,
                           username: currentUserDisplayName,
                           lista: _model.itemNew?.reference.id,
+                          userID: currentUserUid,
                         ));
                     await showDialog(
                       context: context,
