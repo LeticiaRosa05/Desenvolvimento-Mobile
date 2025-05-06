@@ -560,6 +560,7 @@ class _ConfigWidgetState extends State<ConfigWidget> {
                 alignment: AlignmentDirectional(0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Align(
                       alignment: AlignmentDirectional(0.0, -1.0),

@@ -251,6 +251,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // inicial
   {
+    '899y2kmb': {
+      'pt': 'Bem vindo,',
+      'en': '',
+    },
     '8i36ce6h': {
       'pt': 'Procure em suas listas...',
       'en': 'Search your lists...',

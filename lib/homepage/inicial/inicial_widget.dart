@@ -136,9 +136,12 @@ class _InicialWidgetState extends State<InicialWidget> {
                             ),
                           ),
                           Expanded(
-                            child: AuthUserStreamWidget(
-                              builder: (context) => Text(
-                                'Bem vindo, ${currentUserDisplayName}',
+                            child: Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: Text(
+                                FFLocalizations.of(context).getText(
+                                  '899y2kmb' /* Bem vindo, */,
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
@@ -157,6 +160,35 @@ class _InicialWidgetState extends State<InicialWidget> {
                                           .headlineMedium
                                           .fontStyle,
                                     ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: AuthUserStreamWidget(
+                                builder: (context) => Text(
+                                  currentUserDisplayName,
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineMedium
+                                      .override(
+                                        font: GoogleFonts.outfit(
+                                          fontWeight: FontWeight.w500,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .headlineMedium
+                                                  .fontStyle,
+                                        ),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        fontSize: 24.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
+                                ),
                               ),
                             ),
                           ),
@@ -246,6 +278,53 @@ class _InicialWidgetState extends State<InicialWidget> {
                                               controller: _model.textController,
                                               focusNode:
                                                   _model.textFieldFocusNode,
+                                              onFieldSubmitted: (_) async {
+                                                await queryListsRecordOnce()
+                                                    .then(
+                                                      (records) => _model
+                                                              .simpleSearchResults1 =
+                                                          TextSearch(
+                                                        records
+                                                            .map(
+                                                              (record) =>
+                                                                  TextSearchItem
+                                                                      .fromTerms(
+                                                                          record,
+                                                                          [
+                                                                    record
+                                                                        .title,
+                                                                    record
+                                                                        .content
+                                                                  ]),
+                                                            )
+                                                            .toList(),
+                                                      )
+                                                              .search(_model
+                                                                  .textController
+                                                                  .text)
+                                                              .map((r) =>
+                                                                  r.object)
+                                                              .toList(),
+                                                    )
+                                                    .onError((_, __) => _model
+                                                            .simpleSearchResults1 =
+                                                        [])
+                                                    .whenComplete(() =>
+                                                        safeSetState(() {}));
+
+                                                // Vai ser usada pra tirar os resultados normais das listas que o usuário tem acesso, pras listas com restultado da pesquisa que ele fez
+                                                FFAppState().titulo = _model
+                                                    .simpleSearchResults1
+                                                    .map((e) => e.title)
+                                                    .toList()
+                                                    .cast<String>();
+                                                FFAppState().campo = _model
+                                                    .simpleSearchResults1
+                                                    .map((e) => e.content)
+                                                    .toList()
+                                                    .cast<String>();
+                                                safeSetState(() {});
+                                              },
                                               autofocus: false,
                                               obscureText: false,
                                               decoration: InputDecoration(
@@ -823,297 +902,266 @@ class _InicialWidgetState extends State<InicialWidget> {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                12.0, 0.0, 12.0, 0.0),
-                            child: StreamBuilder<List<ListsRecord>>(
-                              stream: queryListsRecord(
-                                queryBuilder: (listsRecord) => listsRecord
-                                    .where(
-                                      'marked',
-                                      isEqualTo: false,
-                                    )
-                                    .where(
-                                      'created_by',
-                                      isEqualTo: currentUserReference,
-                                    ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                      child: StreamBuilder<List<ListsRecord>>(
+                        stream: queryListsRecord(
+                          queryBuilder: (listsRecord) => listsRecord
+                              .where(
+                                'marked',
+                                isEqualTo: false,
+                              )
+                              .where(
+                                'created_by',
+                                isEqualTo: currentUserReference,
                               ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          FlutterFlowTheme.of(context).primary,
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          List<ListsRecord> gridViewListsRecordList =
+                              snapshot.data!;
+
+                          return RefreshIndicator(
+                            onRefresh: () async {
+                              await queryAccessRecordOnce()
+                                  .then(
+                                    (records) => _model.simpleSearchResults2 =
+                                        TextSearch(
+                                      records
+                                          .map(
+                                            (record) =>
+                                                TextSearchItem.fromTerms(
+                                                    record, [record.userID]),
+                                          )
+                                          .toList(),
+                                    )
+                                            .search(currentUserUid)
+                                            .map((r) => r.object)
+                                            .toList(),
+                                  )
+                                  .onError((_, __) =>
+                                      _model.simpleSearchResults2 = [])
+                                  .whenComplete(() => safeSetState(() {}));
+                            },
+                            child: GridView.builder(
+                              padding: EdgeInsets.fromLTRB(
+                                0,
+                                12.0,
+                                0,
+                                12.0,
+                              ),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 12.0,
+                                mainAxisSpacing: 12.0,
+                                childAspectRatio: 1.0,
+                              ),
+                              primary: false,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: gridViewListsRecordList.length,
+                              itemBuilder: (context, gridViewIndex) {
+                                final gridViewListsRecord =
+                                    gridViewListsRecordList[gridViewIndex];
+                                return InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed(
+                                      ListaWidget.routeName,
+                                      queryParameters: {
+                                        'referenceDocument': serializeParam(
+                                          gridViewListsRecord.reference,
+                                          ParamType.DocumentReference,
                                         ),
+                                        'titulo': serializeParam(
+                                          gridViewListsRecord.title,
+                                          ParamType.String,
+                                        ),
+                                        'corpo': serializeParam(
+                                          gridViewListsRecord.content,
+                                          ParamType.String,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                  onLongPress: () async {
+                                    var confirmDialogResponse =
+                                        await showDialog<bool>(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text('Detelar lista'),
+                                                  content: Text(
+                                                      'Tem certeza que deseja deletar a lista?'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext,
+                                                              false),
+                                                      child: Text('Cancelar'),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext,
+                                                              true),
+                                                      child: Text('Confirmar'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ) ??
+                                            false;
+                                    if (confirmDialogResponse) {
+                                      await gridViewListsRecord.reference
+                                          .delete();
+                                    }
+                                  },
+                                  child: Container(
+                                    width: 170.0,
+                                    height: 100.0,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          FlutterFlowTheme.of(context).accent3,
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        width: 2.0,
                                       ),
                                     ),
-                                  );
-                                }
-                                List<ListsRecord> gridViewListsRecordList =
-                                    snapshot.data!;
-
-                                return RefreshIndicator(
-                                  onRefresh: () async {
-                                    await queryAccessRecordOnce()
-                                        .then(
-                                          (records) => _model
-                                              .simpleSearchResults = TextSearch(
-                                            records
-                                                .map(
-                                                  (record) =>
-                                                      TextSearchItem.fromTerms(
-                                                          record,
-                                                          [record.userID]),
-                                                )
-                                                .toList(),
-                                          )
-                                              .search(currentUserUid)
-                                              .map((r) => r.object)
-                                              .toList(),
-                                        )
-                                        .onError((_, __) =>
-                                            _model.simpleSearchResults = [])
-                                        .whenComplete(
-                                            () => safeSetState(() {}));
-                                  },
-                                  child: GridView.builder(
-                                    padding: EdgeInsets.fromLTRB(
-                                      0,
-                                      12.0,
-                                      0,
-                                      12.0,
-                                    ),
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 12.0,
-                                      mainAxisSpacing: 12.0,
-                                      childAspectRatio: 1.0,
-                                    ),
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: gridViewListsRecordList.length,
-                                    itemBuilder: (context, gridViewIndex) {
-                                      final gridViewListsRecord =
-                                          gridViewListsRecordList[
-                                              gridViewIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed(
-                                            ListaWidget.routeName,
-                                            queryParameters: {
-                                              'referenceDocument':
-                                                  serializeParam(
-                                                gridViewListsRecord.reference,
-                                                ParamType.DocumentReference,
-                                              ),
-                                              'titulo': serializeParam(
-                                                gridViewListsRecord.title,
-                                                ParamType.String,
-                                              ),
-                                              'corpo': serializeParam(
-                                                gridViewListsRecord.content,
-                                                ParamType.String,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-                                        },
-                                        onLongPress: () async {
-                                          var confirmDialogResponse =
-                                              await showDialog<bool>(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text(
-                                                            'Detelar lista'),
-                                                        content: Text(
-                                                            'Tem certeza que deseja deletar a lista?'),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext,
-                                                                    false),
-                                                            child: Text(
-                                                                'Cancelar'),
-                                                          ),
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext,
-                                                                    true),
-                                                            child: Text(
-                                                                'Confirmar'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  ) ??
-                                                  false;
-                                          if (confirmDialogResponse) {
-                                            await gridViewListsRecord.reference
-                                                .delete();
-                                          }
-                                        },
-                                        child: Container(
-                                          width: 170.0,
-                                          height: 100.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent3,
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
-                                            border: Border.all(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              width: 2.0,
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 0.0, 5.0, 7.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Stack(
-                                                  children: [
-                                                    Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              0.0, 0.0),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    5.0,
-                                                                    5.0,
-                                                                    5.0,
-                                                                    5.0),
-                                                        child: AutoSizeText(
-                                                          gridViewListsRecord
-                                                              .content
-                                                              .maybeHandleOverflow(
-                                                            maxChars: 115,
-                                                            replacement: '…',
-                                                          ),
-                                                          textAlign:
-                                                              TextAlign.start,
-                                                          maxLines: 5,
-                                                          minFontSize: 14.0,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .labelMedium
-                                                              .override(
-                                                                font:
-                                                                    GoogleFonts
-                                                                        .inter(
-                                                                  fontWeight: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMedium
-                                                                      .fontWeight,
-                                                                  fontStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMedium
-                                                                      .fontStyle,
-                                                                ),
-                                                                color: Color(
-                                                                    0xFF181818),
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight: FlutterFlowTheme.of(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          5.0, 0.0, 5.0, 7.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Stack(
+                                            children: [
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          5.0, 5.0, 5.0, 5.0),
+                                                  child: AutoSizeText(
+                                                    gridViewListsRecord.content
+                                                        .maybeHandleOverflow(
+                                                      maxChars: 115,
+                                                      replacement: '…',
+                                                    ),
+                                                    textAlign: TextAlign.start,
+                                                    maxLines: 5,
+                                                    minFontSize: 14.0,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelMedium
+                                                        .override(
+                                                          font:
+                                                              GoogleFonts.inter(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
                                                                         context)
                                                                     .labelMedium
                                                                     .fontWeight,
-                                                                fontStyle: FlutterFlowTheme.of(
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
                                                                         context)
                                                                     .labelMedium
                                                                     .fontStyle,
-                                                              ),
+                                                          ),
+                                                          color:
+                                                              Color(0xFF181818),
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMedium
+                                                                  .fontStyle,
                                                         ),
-                                                      ),
-                                                    ),
-                                                  ],
+                                                  ),
                                                 ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 1.0),
-                                                  child: Container(
-                                                    width: 157.4,
-                                                    height: 51.69,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .accent4,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Align(
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  -1.0, -1.0),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        5.0,
-                                                                        5.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: AutoSizeText(
-                                                              gridViewListsRecord
-                                                                  .title
-                                                                  .maybeHandleOverflow(
-                                                                maxChars: 7,
-                                                                replacement:
-                                                                    '…',
-                                                              ),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .start,
-                                                              minFontSize: 14.0,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .titleMedium
-                                                                  .override(
-                                                                    font: GoogleFonts
-                                                                        .interTight(
-                                                                      fontWeight: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .titleMedium
-                                                                          .fontWeight,
-                                                                      fontStyle: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .titleMedium
-                                                                          .fontStyle,
-                                                                    ),
-                                                                    letterSpacing:
-                                                                        0.0,
+                                              ),
+                                            ],
+                                          ),
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 1.0),
+                                            child: Container(
+                                              width: 157.4,
+                                              height: 51.7,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .accent4,
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
+                                              ),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            -1.0, -1.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  5.0,
+                                                                  5.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: AutoSizeText(
+                                                        gridViewListsRecord
+                                                            .title
+                                                            .maybeHandleOverflow(
+                                                          maxChars: 7,
+                                                          replacement: '…',
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        minFontSize: 14.0,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .interTight(
                                                                     fontWeight: FlutterFlowTheme.of(
                                                                             context)
                                                                         .titleMedium
@@ -1123,92 +1171,94 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                                         .titleMedium
                                                                         .fontStyle,
                                                                   ),
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            1.0, 1.0),
+                                                    child: Stack(
+                                                      children: [
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  1.0, 1.0),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        7.0,
+                                                                        7.0),
+                                                            child: Container(
+                                                              width: 36.1,
+                                                              height: 36.1,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .accent3,
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
                                                         Align(
                                                           alignment:
                                                               AlignmentDirectional(
-                                                                  1.0, 1.0),
-                                                          child: Stack(
-                                                            children: [
-                                                              Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        1.0,
-                                                                        1.0),
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          7.0,
-                                                                          7.0),
-                                                                  child:
-                                                                      Container(
-                                                                    width: 36.1,
-                                                                    height:
-                                                                        36.1,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .accent3,
-                                                                      shape: BoxShape
-                                                                          .circle,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        -1.94,
-                                                                        0.75),
-                                                                child:
-                                                                    FlutterFlowIconButton(
-                                                                  borderRadius:
-                                                                      8.0,
-                                                                  buttonSize:
-                                                                      40.0,
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .push_pin_outlined,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    size: 24.0,
-                                                                  ),
-                                                                  onPressed:
-                                                                      () async {
-                                                                    await gridViewListsRecord
-                                                                        .reference
-                                                                        .update(
-                                                                            createListsRecordData(
-                                                                      marked:
-                                                                          true,
-                                                                    ));
-                                                                  },
-                                                                ),
-                                                              ),
-                                                            ],
+                                                                  -1.94, 0.75),
+                                                          child:
+                                                              FlutterFlowIconButton(
+                                                            borderRadius: 8.0,
+                                                            buttonSize: 40.0,
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .push_pin_outlined,
+                                                              color:
+                                                                  Colors.black,
+                                                              size: 24.0,
+                                                            ),
+                                                            onPressed:
+                                                                () async {
+                                                              await gridViewListsRecord
+                                                                  .reference
+                                                                  .update(
+                                                                      createListsRecordData(
+                                                                marked: true,
+                                                              ));
+                                                            },
                                                           ),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    },
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 );
                               },
                             ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
                     ),
                   ],
