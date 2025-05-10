@@ -15,7 +15,7 @@ class ListaWidget extends StatefulWidget {
     super.key,
     this.titulo,
     this.corpo,
-    this.referenceDocument,
+    this.refListaAtual,
     this.nomeUsuario,
     this.email,
   });
@@ -23,8 +23,8 @@ class ListaWidget extends StatefulWidget {
   final String? titulo;
   final String? corpo;
 
-  /// referenceDocument
-  final DocumentReference? referenceDocument;
+  /// Referência da lista atual/aberta
+  final DocumentReference? refListaAtual;
 
   final String? nomeUsuario;
   final String? email;
@@ -89,8 +89,8 @@ class _ListaWidgetState extends State<ListaWidget> {
               },
             ),
             title: Visibility(
-              visible: widget.referenceDocument?.id != null &&
-                  widget.referenceDocument?.id != '',
+              visible: widget.refListaAtual?.id != null &&
+                  widget.refListaAtual?.id != '',
               child: Align(
                 alignment: AlignmentDirectional(1.0, 0.0),
                 child: FlutterFlowIconButton(
@@ -102,8 +102,7 @@ class _ListaWidgetState extends State<ListaWidget> {
                     size: 24.0,
                   ),
                   onPressed: () async {
-                    await widget.referenceDocument!
-                        .update(createListsRecordData(
+                    await widget.refListaAtual!.update(createListsRecordData(
                       title: _model.tituloTextController.text,
                       content: _model.campoTextoTextController.text,
                     ));
@@ -113,8 +112,8 @@ class _ListaWidgetState extends State<ListaWidget> {
             ),
             actions: [
               Visibility(
-                visible: widget.referenceDocument?.id == null ||
-                    widget.referenceDocument?.id == '',
+                visible: widget.refListaAtual?.id == null ||
+                    widget.refListaAtual?.id == '',
                 child: Align(
                   alignment: AlignmentDirectional(0.0, -1.0),
                   child: FlutterFlowIconButton(
@@ -141,6 +140,10 @@ class _ListaWidgetState extends State<ListaWidget> {
                             marked: false,
                           ),
                           listsRecordReference);
+
+                      await widget.refListaAtual!.update(createListsRecordData(
+                        listaID: widget.refListaAtual?.id,
+                      ));
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
@@ -175,7 +178,7 @@ class _ListaWidgetState extends State<ListaWidget> {
                     ConfigListaWidget.routeName,
                     queryParameters: {
                       'listaRef': serializeParam(
-                        widget.referenceDocument,
+                        widget.refListaAtual,
                         ParamType.DocumentReference,
                       ),
                     }.withoutNulls,

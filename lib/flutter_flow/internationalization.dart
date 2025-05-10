@@ -253,7 +253,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     '899y2kmb': {
       'pt': 'Bem vindo,',
-      'en': '',
+      'en': 'Welcome,',
     },
     '8i36ce6h': {
       'pt': 'Procure em suas listas...',
@@ -264,8 +264,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Marked lists',
     },
     'hzac5n3n': {
-      'pt': 'Todas as listas',
-      'en': 'All lists',
+      'pt': 'Minhas listas',
+      'en': 'My lists',
+    },
+    'sv2qdwc8': {
+      'pt': 'Listas que tenho acesso',
+      'en': 'Lists I have access to',
     },
     'zm9ekyk5': {
       'pt': 'Home',

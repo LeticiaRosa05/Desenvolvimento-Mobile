@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -36,23 +35,17 @@ class ListsRecord extends FirestoreRecord {
   bool get marked => _marked ?? false;
   bool hasMarked() => _marked != null;
 
-  // "usuariosPermitidos" field.
-  List<String>? _usuariosPermitidos;
-  List<String> get usuariosPermitidos => _usuariosPermitidos ?? const [];
-  bool hasUsuariosPermitidos() => _usuariosPermitidos != null;
-
-  // "id" field.
-  String? _id;
-  String get id => _id ?? '';
-  bool hasId() => _id != null;
+  // "listaID" field.
+  String? _listaID;
+  String get listaID => _listaID ?? '';
+  bool hasListaID() => _listaID != null;
 
   void _initializeFields() {
     _title = snapshotData['title'] as String?;
     _createdBy = snapshotData['created_by'] as DocumentReference?;
     _content = snapshotData['content'] as String?;
     _marked = snapshotData['marked'] as bool?;
-    _usuariosPermitidos = getDataList(snapshotData['usuariosPermitidos']);
-    _id = snapshotData['id'] as String?;
+    _listaID = snapshotData['listaID'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -93,7 +86,7 @@ Map<String, dynamic> createListsRecordData({
   DocumentReference? createdBy,
   String? content,
   bool? marked,
-  String? id,
+  String? listaID,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -101,7 +94,7 @@ Map<String, dynamic> createListsRecordData({
       'created_by': createdBy,
       'content': content,
       'marked': marked,
-      'id': id,
+      'listaID': listaID,
     }.withoutNulls,
   );
 
@@ -113,24 +106,16 @@ class ListsRecordDocumentEquality implements Equality<ListsRecord> {
 
   @override
   bool equals(ListsRecord? e1, ListsRecord? e2) {
-    const listEquality = ListEquality();
     return e1?.title == e2?.title &&
         e1?.createdBy == e2?.createdBy &&
         e1?.content == e2?.content &&
         e1?.marked == e2?.marked &&
-        listEquality.equals(e1?.usuariosPermitidos, e2?.usuariosPermitidos) &&
-        e1?.id == e2?.id;
+        e1?.listaID == e2?.listaID;
   }
 
   @override
-  int hash(ListsRecord? e) => const ListEquality().hash([
-        e?.title,
-        e?.createdBy,
-        e?.content,
-        e?.marked,
-        e?.usuariosPermitidos,
-        e?.id
-      ]);
+  int hash(ListsRecord? e) => const ListEquality()
+      .hash([e?.title, e?.createdBy, e?.content, e?.marked, e?.listaID]);
 
   @override
   bool isValidKey(Object? o) => o is ListsRecord;
