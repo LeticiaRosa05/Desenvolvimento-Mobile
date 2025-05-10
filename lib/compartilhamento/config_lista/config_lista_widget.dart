@@ -469,7 +469,7 @@ class _ConfigListaWidgetState extends State<ConfigListaWidget> {
                                       .whenComplete(() => safeSetState(() {}));
 
                                   if ((_model.simpleSearchResults.isNotEmpty) ==
-                                      false) {
+                                      true) {
                                     await showDialog(
                                       context: context,
                                       builder: (alertDialogContext) {
