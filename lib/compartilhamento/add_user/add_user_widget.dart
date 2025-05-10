@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -343,31 +344,55 @@ class _AddUserWidgetState extends State<AddUserWidget> {
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    await AccessRecord.collection
-                                        .doc()
-                                        .set(createAccessRecordData(
-                                          email: resultadoPesquisaItem.email,
-                                          username:
-                                              resultadoPesquisaItem.displayName,
-                                          lista: widget.listaRefEditando,
-                                          userID: resultadoPesquisaItem.uid,
-                                        ));
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          content:
-                                              Text('Adicionado com sucesso'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('Ok'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
+                                    if (_model.simpleSearchResults
+                                        .where((e) =>
+                                            resultadoPesquisaItem.uid ==
+                                            currentUserReference?.id)
+                                        .toList()
+                                        .isNotEmpty) {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            content: Text(
+                                                'Você não pode se adicionar à sua lista'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      await AccessRecord.collection
+                                          .doc()
+                                          .set(createAccessRecordData(
+                                            email: resultadoPesquisaItem.email,
+                                            username: resultadoPesquisaItem
+                                                .displayName,
+                                            lista: widget.listaRefEditando,
+                                            userID: resultadoPesquisaItem.uid,
+                                          ));
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            content:
+                                                Text('Adicionado com sucesso'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
                                   },
                                   text: FFLocalizations.of(context).getText(
                                     'yf6drp5x' /* Add */,
