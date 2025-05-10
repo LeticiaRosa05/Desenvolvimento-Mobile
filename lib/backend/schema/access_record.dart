@@ -30,10 +30,16 @@ class AccessRecord extends FirestoreRecord {
   String get lista => _lista ?? '';
   bool hasLista() => _lista != null;
 
+  // "userID" field.
+  String? _userID;
+  String get userID => _userID ?? '';
+  bool hasUserID() => _userID != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _username = snapshotData['username'] as String?;
     _lista = snapshotData['lista'] as String?;
+    _userID = snapshotData['userID'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -73,12 +79,14 @@ Map<String, dynamic> createAccessRecordData({
   String? email,
   String? username,
   String? lista,
+  String? userID,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'email': email,
       'username': username,
       'lista': lista,
+      'userID': userID,
     }.withoutNulls,
   );
 
@@ -92,12 +100,13 @@ class AccessRecordDocumentEquality implements Equality<AccessRecord> {
   bool equals(AccessRecord? e1, AccessRecord? e2) {
     return e1?.email == e2?.email &&
         e1?.username == e2?.username &&
-        e1?.lista == e2?.lista;
+        e1?.lista == e2?.lista &&
+        e1?.userID == e2?.userID;
   }
 
   @override
   int hash(AccessRecord? e) =>
-      const ListEquality().hash([e?.email, e?.username, e?.lista]);
+      const ListEquality().hash([e?.email, e?.username, e?.lista, e?.userID]);
 
   @override
   bool isValidKey(Object? o) => o is AccessRecord;

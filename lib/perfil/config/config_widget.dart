@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'config_model.dart';
@@ -174,7 +175,7 @@ class _ConfigWidgetState extends State<ConfigWidget> {
 
                                     final textUsersRecord = snapshot.data!;
 
-                                    return Text(
+                                    return AutoSizeText(
                                       textUsersRecord.displayName,
                                       style: FlutterFlowTheme.of(context)
                                           .headlineSmall
@@ -477,7 +478,6 @@ class _ConfigWidgetState extends State<ConfigWidget> {
                       setDarkModeSetting(context, ThemeMode.dark);
                     },
                     child: Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).primaryBackground,
                       ),
@@ -557,9 +557,10 @@ class _ConfigWidgetState extends State<ConfigWidget> {
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Align(
                       alignment: AlignmentDirectional(0.0, -1.0),

@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -123,29 +124,51 @@ class _AddUserWidgetState extends State<AddUserWidget> {
                     controller: _model.textController,
                     focusNode: _model.textFieldFocusNode,
                     onFieldSubmitted: (_) async {
-                      await queryUsersRecordOnce()
-                          .then(
-                            (records) => _model.simpleSearchResults =
-                                TextSearch(
-                              records
-                                  .map(
-                                    (record) => TextSearchItem.fromTerms(record,
-                                        [record.email, record.displayName]),
-                                  )
-                                  .toList(),
-                            )
-                                    .search(widget.textoPesquisa!)
-                                    .map((r) => r.object)
+                      // Se tirar essa função pra ver se a pesquisa ta vazia + alert dialog, da certo a filtragem quando pesquisa
+                      if (_model.textController.text != '') {
+                        await queryUsersRecordOnce()
+                            .then(
+                              (records) => _model.simpleSearchResults =
+                                  TextSearch(
+                                records
+                                    .map(
+                                      (record) => TextSearchItem.fromTerms(
+                                          record,
+                                          [record.email, record.displayName]),
+                                    )
                                     .toList(),
-                          )
-                          .onError((_, __) => _model.simpleSearchResults = [])
-                          .whenComplete(() => safeSetState(() {}));
+                              )
+                                      .search(_model.textController.text)
+                                      .map((r) => r.object)
+                                      .toList(),
+                            )
+                            .onError((_, __) => _model.simpleSearchResults = [])
+                            .whenComplete(() => safeSetState(() {}));
 
-                      _model.resultadoBusca = _model.simpleSearchResults
-                          .map((e) => e.reference)
-                          .toList()
-                          .cast<DocumentReference>();
-                      safeSetState(() {});
+                        _model.resultadoBusca = _model.simpleSearchResults
+                            .map((e) => e.reference)
+                            .toList()
+                            .cast<DocumentReference>();
+                        safeSetState(() {});
+                      } else {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('Pesquisa vazia'),
+                              content: Text(
+                                  'Por favor pesquise por um email ou nome de usuário!'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('Ok'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
                     },
                     autofocus: true,
                     textInputAction: TextInputAction.search,
@@ -321,14 +344,55 @@ class _AddUserWidgetState extends State<AddUserWidget> {
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    await AccessRecord.collection
-                                        .doc()
-                                        .set(createAccessRecordData(
-                                          email: resultadoPesquisaItem.email,
-                                          username:
-                                              resultadoPesquisaItem.displayName,
-                                          lista: widget.listaRefEditando,
-                                        ));
+                                    if (_model.simpleSearchResults
+                                        .where((e) =>
+                                            resultadoPesquisaItem.uid ==
+                                            currentUserReference?.id)
+                                        .toList()
+                                        .isNotEmpty) {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            content: Text(
+                                                'Você não pode se adicionar à sua lista'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      await AccessRecord.collection
+                                          .doc()
+                                          .set(createAccessRecordData(
+                                            email: resultadoPesquisaItem.email,
+                                            username: resultadoPesquisaItem
+                                                .displayName,
+                                            lista: widget.listaRefEditando,
+                                            userID: resultadoPesquisaItem.uid,
+                                          ));
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            content:
+                                                Text('Adicionado com sucesso'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
                                   },
                                   text: FFLocalizations.of(context).getText(
                                     'yf6drp5x' /* Add */,

@@ -100,6 +100,12 @@ class FFAppState extends ChangeNotifier {
     campo.insert(index, value);
     prefs.setStringList('ff_campo', _campo);
   }
+
+  bool _verUsuarios = false;
+  bool get verUsuarios => _verUsuarios;
+  set verUsuarios(bool value) {
+    _verUsuarios = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

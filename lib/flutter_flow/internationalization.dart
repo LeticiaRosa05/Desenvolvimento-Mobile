@@ -251,6 +251,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // inicial
   {
+    '899y2kmb': {
+      'pt': 'Bem vindo,',
+      'en': 'Welcome,',
+    },
     '8i36ce6h': {
       'pt': 'Procure em suas listas...',
       'en': 'Search your lists...',
@@ -260,8 +264,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Marked lists',
     },
     'hzac5n3n': {
-      'pt': 'Todas as listas',
-      'en': 'All lists',
+      'pt': 'Minhas listas',
+      'en': 'My lists',
+    },
+    'sv2qdwc8': {
+      'pt': 'Listas que tenho acesso',
+      'en': 'Lists I have access to',
     },
     'zm9ekyk5': {
       'pt': 'Home',
@@ -340,6 +348,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // ConfigLista
   {
+    'amoanvqf': {
+      'pt': 'Configurações da lista',
+      'en': '',
+    },
     'xe5xctry': {
       'pt': 'Usuários com acesso',
       'en': '',
@@ -350,10 +362,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'w4yxrsgs': {
       'pt': 'Deletar a lista',
-      'en': '',
-    },
-    'phzhgrl3': {
-      'pt': 'Configurações da lista',
       'en': '',
     },
     'q5vl02ma': {

@@ -123,8 +123,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'corpo',
               ParamType.String,
             ),
-            referenceDocument: params.getParam(
-              'referenceDocument',
+            refListaAtual: params.getParam(
+              'refListaAtual',
               ParamType.DocumentReference,
               isList: false,
               collectionNamePath: ['lists'],
