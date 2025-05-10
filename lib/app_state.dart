@@ -106,6 +106,13 @@ class FFAppState extends ChangeNotifier {
   set verUsuarios(bool value) {
     _verUsuarios = value;
   }
+
+  /// Usado para sumir o botão de criar lista se ela já tiver sido criada
+  bool _botaoCriarLista = false;
+  bool get botaoCriarLista => _botaoCriarLista;
+  set botaoCriarLista(bool value) {
+    _botaoCriarLista = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

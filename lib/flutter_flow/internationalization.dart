@@ -224,7 +224,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Alterar Idioma',
       'en': 'Change Language',
     },
-    'dn2bhpkh': {
+    'w0nks453': {
       'pt': 'Condiguração da conta',
       'en': 'Account configuration',
     },

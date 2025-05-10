@@ -557,60 +557,33 @@ class _ConfigWidgetState extends State<ConfigWidget> {
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional(0.0, -1.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 12.0, 0.0, 12.0),
-                        child: Text(
-                          FFLocalizations.of(context).getText(
-                            'dn2bhpkh' /* Condiguração da conta */,
-                          ),
-                          style: FlutterFlowTheme.of(context)
-                              .labelLarge
-                              .override(
-                                font: GoogleFonts.inter(
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .labelLarge
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .labelLarge
-                                      .fontStyle,
-                                ),
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                letterSpacing: 0.0,
-                                fontWeight: FlutterFlowTheme.of(context)
-                                    .labelLarge
-                                    .fontWeight,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .labelLarge
-                                    .fontStyle,
-                              ),
-                        ),
-                      ),
+                alignment: AlignmentDirectional(-1.0, 0.0),
+                child: Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(24.0, 12.0, 0.0, 12.0),
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      'w0nks453' /* Condiguração da conta */,
                     ),
-                    if (Theme.of(context).brightness == Brightness.light)
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          setDarkModeSetting(context, ThemeMode.dark);
-                        },
-                        child: Container(
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
+                    textAlign: TextAlign.start,
+                    style: FlutterFlowTheme.of(context).labelLarge.override(
+                          font: GoogleFonts.inter(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .labelLarge
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .labelLarge
+                                .fontStyle,
                           ),
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .labelLarge
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).labelLarge.fontStyle,
                         ),
-                      ),
-                  ],
+                  ),
                 ),
               ),
               Row(
