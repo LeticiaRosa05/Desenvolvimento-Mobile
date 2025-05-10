@@ -173,7 +173,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                     maxChars: 10,
                                     replacement: '…',
                                   ),
-                                  textAlign: TextAlign.center,
+                                  textAlign: TextAlign.start,
                                   style: FlutterFlowTheme.of(context)
                                       .headlineMedium
                                       .override(
@@ -1272,35 +1272,36 @@ class _InicialWidgetState extends State<InicialWidget> {
                             },
                           ),
                         ),
-                        Align(
-                          alignment: AlignmentDirectional(-1.0, 0.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 0.0, 12.0),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                'sv2qdwc8' /* Listas que tenho acesso */,
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    font: GoogleFonts.outfit(
+                        if (inicialListsRecordList.isNotEmpty)
+                          Align(
+                            alignment: AlignmentDirectional(-1.0, 0.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 16.0, 0.0, 12.0),
+                              child: Text(
+                                FFLocalizations.of(context).getText(
+                                  'sv2qdwc8' /* Listas que tenho acesso */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      font: GoogleFonts.outfit(
+                                        fontWeight: FontWeight.w500,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .fontStyle,
+                                      ),
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.w500,
                                       fontStyle: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .fontStyle,
                                     ),
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .fontStyle,
-                                  ),
+                              ),
                             ),
                           ),
-                        ),
 
                         // No filtro 2 da query, está buscando o listaID(da coleção de listas) no resultado do simples search, que busca na coleção de acessos as tabelas que possuem o ID do meu usuário
                         // > Ta mostrando todas as listas que estão com marked false, pq o listaID ta vazio, então ele deciciu retornar todas já q n é posível uma comparação

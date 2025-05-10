@@ -7,6 +7,7 @@ import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'lista_model.dart';
 export 'lista_model.dart';
 
@@ -63,6 +64,8 @@ class _ListaWidgetState extends State<ListaWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -105,6 +108,7 @@ class _ListaWidgetState extends State<ListaWidget> {
                     await widget.refListaAtual!.update(createListsRecordData(
                       title: _model.tituloTextController.text,
                       content: _model.campoTextoTextController.text,
+                      listaID: widget.refListaAtual?.id,
                     ));
                   },
                 ),
@@ -112,8 +116,9 @@ class _ListaWidgetState extends State<ListaWidget> {
             ),
             actions: [
               Visibility(
-                visible: widget.refListaAtual?.id == null ||
-                    widget.refListaAtual?.id == '',
+                visible: (widget.refListaAtual?.id == null ||
+                        widget.refListaAtual?.id == '') ||
+                    (FFAppState().botaoCriarLista == false),
                 child: Align(
                   alignment: AlignmentDirectional(0.0, -1.0),
                   child: FlutterFlowIconButton(
@@ -140,10 +145,8 @@ class _ListaWidgetState extends State<ListaWidget> {
                             marked: false,
                           ),
                           listsRecordReference);
-
-                      await widget.refListaAtual!.update(createListsRecordData(
-                        listaID: widget.refListaAtual?.id,
-                      ));
+                      FFAppState().botaoCriarLista = true;
+                      safeSetState(() {});
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
