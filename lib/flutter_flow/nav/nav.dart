@@ -109,7 +109,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: InicialWidget.routeName,
           path: InicialWidget.routePath,
-          builder: (context, params) => InicialWidget(),
+          builder: (context, params) => InicialWidget(
+            listasAdiciona: params.getParam<String>(
+              'listasAdiciona',
+              ParamType.String,
+              isList: true,
+            ),
+          ),
         ),
         FFRoute(
           name: ListaWidget.routeName,
