@@ -271,10 +271,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Listas que tenho acesso',
       'en': 'Lists I have access to',
     },
-    'flnmjg8w': {
-      'pt': 'Hello World',
-      'en': '',
-    },
     'zm9ekyk5': {
       'pt': 'Home',
       'en': 'Home',
