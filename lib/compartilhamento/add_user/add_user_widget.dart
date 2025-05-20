@@ -355,7 +355,7 @@ class _AddUserWidgetState extends State<AddUserWidget> {
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
                                             content: Text(
-                                                'Você não pode se adicionar à sua lista'),
+                                                'Você não pode se adicionar à uma lista que você já tem acesso.'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(

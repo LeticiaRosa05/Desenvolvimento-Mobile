@@ -66,7 +66,7 @@ class _LogoWidgetState extends State<LogoWidget> {
                     child: Image.asset(
                       Theme.of(context).brightness == Brightness.dark
                           ? 'assets/images/_245_0-removebg-preview.png'
-                          : 'assets/images/logo_nova_removed-bg.png',
+                          : 'assets/images/logo_nova_removed-bg_aumentadaComNome.png',
                       width: 350.0,
                       height: 350.0,
                       fit: BoxFit.cover,

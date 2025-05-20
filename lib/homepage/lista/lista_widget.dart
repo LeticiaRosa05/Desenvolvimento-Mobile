@@ -88,7 +88,7 @@ class _ListaWidgetState extends State<ListaWidget> {
                 size: 30.0,
               ),
               onPressed: () async {
-                context.pushNamed(InicialWidget.routeName);
+                context.safePop();
               },
             ),
             title: Visibility(

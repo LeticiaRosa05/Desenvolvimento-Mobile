@@ -6,15 +6,21 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:text_search/text_search.dart';
 import 'inicial_model.dart';
 export 'inicial_model.dart';
 
 class InicialWidget extends StatefulWidget {
-  const InicialWidget({super.key});
+  const InicialWidget({
+    super.key,
+    this.listasAdiciona,
+  });
+
+  final List<String>? listasAdiciona;
 
   static String routeName = 'inicial';
   static String routePath = '/inicial';
@@ -33,6 +39,24 @@ class _InicialWidgetState extends State<InicialWidget> {
     super.initState();
     _model = createModel(context, () => InicialModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      // PesquisaListasAcesso
+      await queryAccessRecordOnce()
+          .then(
+            (records) => _model.simpleSearchResults1 = TextSearch(
+              records
+                  .map(
+                    (record) =>
+                        TextSearchItem.fromTerms(record, [record.userID]),
+                  )
+                  .toList(),
+            ).search(currentUserUid).map((r) => r.object).toList(),
+          )
+          .onError((_, __) => _model.simpleSearchResults1 = [])
+          .whenComplete(() => safeSetState(() {}));
+    });
+
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
   }
@@ -48,10 +72,15 @@ class _InicialWidgetState extends State<InicialWidget> {
   Widget build(BuildContext context) {
     return StreamBuilder<List<ListsRecord>>(
       stream: queryListsRecord(
-        queryBuilder: (listsRecord) => listsRecord.where(
-          'marked',
-          isEqualTo: true,
-        ),
+        queryBuilder: (listsRecord) => listsRecord
+            .where(
+              'marked',
+              isEqualTo: true,
+            )
+            .where(
+              'created_by',
+              isEqualTo: currentUserReference,
+            ),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -136,13 +165,41 @@ class _InicialWidgetState extends State<InicialWidget> {
                               },
                             ),
                           ),
-                          Expanded(
-                            child: Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  '899y2kmb' /* Bem vindo, */,
+                          Align(
+                            alignment: AlignmentDirectional(-1.0, 0.0),
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                '899y2kmb' /* Bem vindo,  */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .headlineMedium
+                                  .override(
+                                    font: GoogleFonts.outfit(
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
+                                    ),
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 24.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .headlineMedium
+                                        .fontStyle,
+                                  ),
+                            ),
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(-1.0, 0.0),
+                            child: AuthUserStreamWidget(
+                              builder: (context) => AutoSizeText(
+                                currentUserDisplayName.maybeHandleOverflow(
+                                  maxChars: 10,
+                                  replacement: '…',
                                 ),
+                                textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
@@ -161,39 +218,6 @@ class _InicialWidgetState extends State<InicialWidget> {
                                           .headlineMedium
                                           .fontStyle,
                                     ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
-                              child: AuthUserStreamWidget(
-                                builder: (context) => AutoSizeText(
-                                  currentUserDisplayName.maybeHandleOverflow(
-                                    maxChars: 10,
-                                    replacement: '…',
-                                  ),
-                                  textAlign: TextAlign.start,
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineMedium
-                                      .override(
-                                        font: GoogleFonts.outfit(
-                                          fontWeight: FontWeight.w500,
-                                          fontStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineMedium
-                                                  .fontStyle,
-                                        ),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        fontSize: 24.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .headlineMedium
-                                            .fontStyle,
-                                      ),
-                                ),
                               ),
                             ),
                           ),
@@ -289,7 +313,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                 await queryListsRecordOnce()
                                                     .then(
                                                       (records) => _model
-                                                              .simpleSearchResults1 =
+                                                              .simpleSearchResults2 =
                                                           TextSearch(
                                                         records
                                                             .map(
@@ -299,9 +323,9 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                                           record,
                                                                           [
                                                                     record
-                                                                        .title,
+                                                                        .content,
                                                                     record
-                                                                        .content
+                                                                        .title
                                                                   ]),
                                                             )
                                                             .toList(),
@@ -314,22 +338,11 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                               .toList(),
                                                     )
                                                     .onError((_, __) => _model
-                                                            .simpleSearchResults1 =
+                                                            .simpleSearchResults2 =
                                                         [])
                                                     .whenComplete(() =>
                                                         safeSetState(() {}));
 
-                                                // Vai ser usada pra tirar os resultados normais das listas que o usuário tem acesso, pras listas com restultado da pesquisa que ele fez
-                                                FFAppState().titulo = _model
-                                                    .simpleSearchResults1
-                                                    .map((e) => e.title)
-                                                    .toList()
-                                                    .cast<String>();
-                                                FFAppState().campo = _model
-                                                    .simpleSearchResults1
-                                                    .map((e) => e.content)
-                                                    .toList()
-                                                    .cast<String>();
                                                 safeSetState(() {});
                                               },
                                               autofocus: false,
@@ -438,29 +451,6 @@ class _InicialWidgetState extends State<InicialWidget> {
                                           ),
                                         ),
                                       ),
-                                      Opacity(
-                                        opacity: 0.0,
-                                        child: FlutterFlowIconButton(
-                                          borderColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .alternate,
-                                          borderRadius: 10.0,
-                                          borderWidth: 1.0,
-                                          buttonSize: 40.0,
-                                          fillColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryBackground,
-                                          icon: FaIcon(
-                                            FontAwesomeIcons.trashAlt,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 24.0,
-                                          ),
-                                          onPressed: () async {
-                                            Navigator.pop(context);
-                                          },
-                                        ),
-                                      ),
                                     ],
                                   ),
                                 ),
@@ -516,60 +506,61 @@ class _InicialWidgetState extends State<InicialWidget> {
                                     // Teoricamente, seria necessário que essa busca pelo meu email num campo de acesso teria que ser dentro da lista que tenho acesso mas não é minha, pois assim ela seria puxada como está sendo com a query atual, onde a lista com ascaracterísticas buscadas é puxada.
                                     Visibility(
                                   visible: inicialListsRecordList.isNotEmpty,
-                                  child: StreamBuilder<List<ListsRecord>>(
-                                    stream: queryListsRecord(
-                                      queryBuilder: (listsRecord) => listsRecord
-                                          .where(
-                                            'marked',
-                                            isEqualTo: true,
-                                          )
-                                          .where(
-                                            'created_by',
-                                            isEqualTo: currentUserReference,
-                                          ),
-                                    ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50.0,
-                                            height: 50.0,
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10.0, 10.0, 10.0, 10.0),
+                                    child: StreamBuilder<List<ListsRecord>>(
+                                      stream: queryListsRecord(
+                                        queryBuilder: (listsRecord) =>
+                                            listsRecord
+                                                .where(
+                                                  'marked',
+                                                  isEqualTo: true,
+                                                )
+                                                .where(
+                                                  'created_by',
+                                                  isEqualTo:
+                                                      currentUserReference,
+                                                ),
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        );
-                                      }
-                                      List<ListsRecord>
-                                          listViewMarcadasListsRecordList =
-                                          snapshot.data!;
+                                          );
+                                        }
+                                        List<ListsRecord>
+                                            listViewMarcadasListsRecordList =
+                                            snapshot.data!;
 
-                                      return ListView.separated(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 16.0),
-                                        primary: false,
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount:
-                                            listViewMarcadasListsRecordList
-                                                .length,
-                                        separatorBuilder: (_, __) =>
-                                            SizedBox(width: 16.0),
-                                        itemBuilder:
-                                            (context, listViewMarcadasIndex) {
-                                          final listViewMarcadasListsRecord =
-                                              listViewMarcadasListsRecordList[
-                                                  listViewMarcadasIndex];
-                                          return Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 12.0, 0.0, 12.0),
-                                            child: InkWell(
+                                        return ListView.separated(
+                                          padding: EdgeInsets.zero,
+                                          primary: false,
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount:
+                                              listViewMarcadasListsRecordList
+                                                  .length,
+                                          separatorBuilder: (_, __) =>
+                                              SizedBox(width: 10.0),
+                                          itemBuilder:
+                                              (context, listViewMarcadasIndex) {
+                                            final listViewMarcadasListsRecord =
+                                                listViewMarcadasListsRecordList[
+                                                    listViewMarcadasIndex];
+                                            return InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
                                               hoverColor: Colors.transparent,
@@ -639,7 +630,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                 }
                                               },
                                               child: Container(
-                                                width: 170.0,
+                                                width: 180.0,
                                                 height: 100.0,
                                                 decoration: BoxDecoration(
                                                   color: FlutterFlowTheme.of(
@@ -685,7 +676,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                                 listViewMarcadasListsRecord
                                                                     .content
                                                                     .maybeHandleOverflow(
-                                                                  maxChars: 100,
+                                                                  maxChars: 115,
                                                                   replacement:
                                                                       '…',
                                                                 ),
@@ -694,7 +685,7 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                                         .start,
                                                                 maxLines: 5,
                                                                 minFontSize:
-                                                                    12.0,
+                                                                    14.0,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .labelMedium
@@ -731,8 +722,8 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                             AlignmentDirectional(
                                                                 0.0, 1.0),
                                                         child: Container(
-                                                          width: 152.7,
-                                                          height: 51.79,
+                                                          width: 157.4,
+                                                          height: 51.7,
                                                           decoration:
                                                               BoxDecoration(
                                                             color: FlutterFlowTheme
@@ -823,9 +814,9 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                                         child:
                                                                             Container(
                                                                           width:
-                                                                              36.11,
+                                                                              36.1,
                                                                           height:
-                                                                              36.11,
+                                                                              36.1,
                                                                           decoration:
                                                                               BoxDecoration(
                                                                             color:
@@ -838,8 +829,8 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                                     ),
                                                                     Align(
                                                                       alignment: AlignmentDirectional(
-                                                                          -4.08,
-                                                                          0.83),
+                                                                          -3.0,
+                                                                          0.34),
                                                                       child:
                                                                           FlutterFlowIconButton(
                                                                         borderRadius:
@@ -877,11 +868,11 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
+                                            );
+                                          },
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                               ),
@@ -1231,8 +1222,8 @@ class _InicialWidgetState extends State<InicialWidget> {
                                                           Align(
                                                             alignment:
                                                                 AlignmentDirectional(
-                                                                    -1.94,
-                                                                    0.75),
+                                                                    -2.68,
+                                                                    0.68),
                                                             child:
                                                                 FlutterFlowIconButton(
                                                               borderRadius: 8.0,
@@ -1272,435 +1263,412 @@ class _InicialWidgetState extends State<InicialWidget> {
                             },
                           ),
                         ),
-                        if (inicialListsRecordList.isNotEmpty)
-                          Align(
-                            alignment: AlignmentDirectional(-1.0, 0.0),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 16.0, 0.0, 12.0),
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'sv2qdwc8' /* Listas que tenho acesso */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      font: GoogleFonts.outfit(
-                                        fontWeight: FontWeight.w500,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium
-                                            .fontStyle,
-                                      ),
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      letterSpacing: 0.0,
+                        Align(
+                          alignment: AlignmentDirectional(-1.0, 0.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 16.0, 0.0, 12.0),
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'sv2qdwc8' /* Listas que tenho acesso */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    font: GoogleFonts.outfit(
                                       fontWeight: FontWeight.w500,
                                       fontStyle: FlutterFlowTheme.of(context)
                                           .labelMedium
                                           .fontStyle,
                                     ),
-                              ),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
+                                  ),
                             ),
                           ),
-
-                        // No filtro 2 da query, está buscando o listaID(da coleção de listas) no resultado do simples search, que busca na coleção de acessos as tabelas que possuem o ID do meu usuário
-                        // > Ta mostrando todas as listas que estão com marked false, pq o listaID ta vazio, então ele deciciu retornar todas já q n é posível uma comparação
-                        // Colocar uma condição pra não mostrar as listas criadas por mim
-                        if (_model.simpleSearchResults2.isNotEmpty)
+                        ),
+                        if (_model.simpleSearchResults1.isNotEmpty)
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                12.0, 0.0, 12.0, 0.0),
-                            child: StreamBuilder<List<ListsRecord>>(
-                              stream: queryListsRecord(
-                                queryBuilder: (listsRecord) => listsRecord
-                                    .where(
-                                      'marked',
-                                      isEqualTo: false,
-                                    )
-                                    .whereIn(
-                                        'listaID',
-                                        _model.simpleSearchResults2
-                                            .map((e) => e.lista)
-                                            .toList())
-                                    .where(
-                                      'created_by',
-                                      isNotEqualTo: currentUserReference,
-                                    ),
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                          FlutterFlowTheme.of(context).primary,
+                            padding: EdgeInsets.all(10.0),
+                            child: Builder(
+                              builder: (context) {
+                                final listaQueTenhoAcesso =
+                                    _model.simpleSearchResults1.toList();
+
+                                return ListView.separated(
+                                  padding: EdgeInsets.zero,
+                                  primary: false,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: listaQueTenhoAcesso.length,
+                                  separatorBuilder: (_, __) =>
+                                      SizedBox(height: 10.0),
+                                  itemBuilder:
+                                      (context, listaQueTenhoAcessoIndex) {
+                                    final listaQueTenhoAcessoItem =
+                                        listaQueTenhoAcesso[
+                                            listaQueTenhoAcessoIndex];
+                                    return StreamBuilder<List<ListsRecord>>(
+                                      stream: queryListsRecord(
+                                        queryBuilder: (listsRecord) =>
+                                            listsRecord.where(
+                                          'listaID',
+                                          isEqualTo:
+                                              listaQueTenhoAcessoItem.lista,
                                         ),
                                       ),
-                                    ),
-                                  );
-                                }
-                                List<ListsRecord>
-                                    gridViewTenhoAcessoListsRecordList =
-                                    snapshot.data!;
-
-                                return RefreshIndicator(
-                                  onRefresh: () async {
-                                    await queryAccessRecordOnce()
-                                        .then(
-                                          (records) =>
-                                              _model.simpleSearchResults2 =
-                                                  TextSearch(
-                                            records
-                                                .map(
-                                                  (record) =>
-                                                      TextSearchItem.fromTerms(
-                                                          record,
-                                                          [record.userID]),
-                                                )
-                                                .toList(),
-                                          )
-                                                      .search(currentUserUid)
-                                                      .map((r) => r.object)
-                                                      .toList(),
-                                        )
-                                        .onError((_, __) =>
-                                            _model.simpleSearchResults2 = [])
-                                        .whenComplete(
-                                            () => safeSetState(() {}));
-                                  },
-                                  child: GridView.builder(
-                                    padding: EdgeInsets.fromLTRB(
-                                      0,
-                                      12.0,
-                                      0,
-                                      12.0,
-                                    ),
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 12.0,
-                                      mainAxisSpacing: 12.0,
-                                      childAspectRatio: 1.0,
-                                    ),
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount:
-                                        gridViewTenhoAcessoListsRecordList
-                                            .length,
-                                    itemBuilder:
-                                        (context, gridViewTenhoAcessoIndex) {
-                                      final gridViewTenhoAcessoListsRecord =
-                                          gridViewTenhoAcessoListsRecordList[
-                                              gridViewTenhoAcessoIndex];
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed(
-                                            ListaWidget.routeName,
-                                            queryParameters: {
-                                              'refListaAtual': serializeParam(
-                                                gridViewTenhoAcessoListsRecord
-                                                    .reference,
-                                                ParamType.DocumentReference,
-                                              ),
-                                              'titulo': serializeParam(
-                                                gridViewTenhoAcessoListsRecord
-                                                    .title,
-                                                ParamType.String,
-                                              ),
-                                              'corpo': serializeParam(
-                                                gridViewTenhoAcessoListsRecord
-                                                    .content,
-                                                ParamType.String,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-                                        },
-                                        onLongPress: () async {
-                                          var confirmDialogResponse =
-                                              await showDialog<bool>(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text(
-                                                            'Detelar lista'),
-                                                        content: Text(
-                                                            'Tem certeza que deseja deletar a lista?'),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext,
-                                                                    false),
-                                                            child: Text(
-                                                                'Cancelar'),
-                                                          ),
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext,
-                                                                    true),
-                                                            child: Text(
-                                                                'Confirmar'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  ) ??
-                                                  false;
-                                          if (confirmDialogResponse) {
-                                            await gridViewTenhoAcessoListsRecord
-                                                .reference
-                                                .delete();
-                                          }
-                                        },
-                                        child: Container(
-                                          width: 170.0,
-                                          height: 100.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent3,
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
-                                            border: Border.all(
-                                              color:
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
-                                              width: 2.0,
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 0.0, 5.0, 7.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Stack(
-                                                  children: [
-                                                    Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              0.0, 0.0),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    5.0,
-                                                                    5.0,
-                                                                    5.0,
-                                                                    5.0),
-                                                        child: AutoSizeText(
-                                                          gridViewTenhoAcessoListsRecord
-                                                              .content
-                                                              .maybeHandleOverflow(
-                                                            maxChars: 115,
-                                                            replacement: '…',
-                                                          ),
-                                                          textAlign:
-                                                              TextAlign.start,
-                                                          maxLines: 5,
-                                                          minFontSize: 14.0,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .labelMedium
-                                                              .override(
-                                                                font:
-                                                                    GoogleFonts
-                                                                        .inter(
-                                                                  fontWeight: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMedium
-                                                                      .fontWeight,
-                                                                  fontStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .labelMedium
-                                                                      .fontStyle,
-                                                                ),
-                                                                color: Color(
-                                                                    0xFF181818),
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontWeight,
-                                                                fontStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .fontStyle,
-                                                              ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
                                                 ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 1.0),
-                                                  child: Container(
-                                                    width: 157.4,
-                                                    height: 51.7,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .accent4,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<ListsRecord>
+                                            containerListsRecordList =
+                                            snapshot.data!;
+
+                                        return Container(
+                                          width: 170.0,
+                                          height: 373.1,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Builder(
+                                                builder: (context) {
+                                                  final itemListaQuetenhoAcesso =
+                                                      containerListsRecordList
+                                                          .toList();
+
+                                                  return GridView.builder(
+                                                    padding: EdgeInsets.zero,
+                                                    gridDelegate:
+                                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 2,
+                                                      crossAxisSpacing: 10.0,
+                                                      mainAxisSpacing: 10.0,
+                                                      childAspectRatio: 1.0,
                                                     ),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Align(
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  -1.0, -1.0),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        5.0,
-                                                                        5.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: AutoSizeText(
-                                                              gridViewTenhoAcessoListsRecord
-                                                                  .title
-                                                                  .maybeHandleOverflow(
-                                                                maxChars: 7,
-                                                                replacement:
-                                                                    '…',
-                                                              ),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .start,
-                                                              minFontSize: 14.0,
-                                                              style: FlutterFlowTheme
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    itemCount:
+                                                        itemListaQuetenhoAcesso
+                                                            .length,
+                                                    itemBuilder: (context,
+                                                        itemListaQuetenhoAcessoIndex) {
+                                                      final itemListaQuetenhoAcessoItem =
+                                                          itemListaQuetenhoAcesso[
+                                                              itemListaQuetenhoAcessoIndex];
+                                                      return Visibility(
+                                                        visible:
+                                                            itemListaQuetenhoAcessoItem
+                                                                    .listaID ==
+                                                                listaQueTenhoAcessoItem
+                                                                    .lista,
+                                                        child: InkWell(
+                                                          splashColor: Colors
+                                                              .transparent,
+                                                          focusColor: Colors
+                                                              .transparent,
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          highlightColor: Colors
+                                                              .transparent,
+                                                          onTap: () async {
+                                                            context.pushNamed(
+                                                              ListaWidget
+                                                                  .routeName,
+                                                              queryParameters: {
+                                                                'refListaAtual':
+                                                                    serializeParam(
+                                                                  itemListaQuetenhoAcessoItem
+                                                                      .reference,
+                                                                  ParamType
+                                                                      .DocumentReference,
+                                                                ),
+                                                                'titulo':
+                                                                    serializeParam(
+                                                                  itemListaQuetenhoAcessoItem
+                                                                      .title,
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                                'corpo':
+                                                                    serializeParam(
+                                                                  itemListaQuetenhoAcessoItem
+                                                                      .content,
+                                                                  ParamType
+                                                                      .String,
+                                                                ),
+                                                              }.withoutNulls,
+                                                            );
+                                                          },
+                                                          onLongPress:
+                                                              () async {
+                                                            var confirmDialogResponse =
+                                                                await showDialog<
+                                                                        bool>(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (alertDialogContext) {
+                                                                        return AlertDialog(
+                                                                          title:
+                                                                              Text('Detelar lista'),
+                                                                          content:
+                                                                              Text('Tem certeza que deseja deletar a lista?'),
+                                                                          actions: [
+                                                                            TextButton(
+                                                                              onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                              child: Text('Cancelar'),
+                                                                            ),
+                                                                            TextButton(
+                                                                              onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                              child: Text('Confirmar'),
+                                                                            ),
+                                                                          ],
+                                                                        );
+                                                                      },
+                                                                    ) ??
+                                                                    false;
+                                                            if (confirmDialogResponse) {
+                                                              await itemListaQuetenhoAcessoItem
+                                                                  .reference
+                                                                  .delete();
+                                                            }
+                                                          },
+                                                          child: Container(
+                                                            width: 170.0,
+                                                            height: 125.0,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .titleMedium
-                                                                  .override(
-                                                                    font: GoogleFonts
-                                                                        .interTight(
-                                                                      fontWeight: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .titleMedium
-                                                                          .fontWeight,
-                                                                      fontStyle: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .titleMedium
-                                                                          .fontStyle,
-                                                                    ),
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleMedium
-                                                                        .fontWeight,
-                                                                    fontStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleMedium
-                                                                        .fontStyle,
+                                                                  .accent3,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12.0),
+                                                              border:
+                                                                  Border.all(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                                width: 2.0,
+                                                              ),
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          5.0,
+                                                                          0.0,
+                                                                          5.0,
+                                                                          7.0),
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Stack(
+                                                                    children: [
+                                                                      Align(
+                                                                        alignment: AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              5.0,
+                                                                              5.0,
+                                                                              5.0,
+                                                                              5.0),
+                                                                          child:
+                                                                              AutoSizeText(
+                                                                            itemListaQuetenhoAcessoItem.content.maybeHandleOverflow(
+                                                                              maxChars: 115,
+                                                                              replacement: '…',
+                                                                            ),
+                                                                            textAlign:
+                                                                                TextAlign.start,
+                                                                            maxLines:
+                                                                                5,
+                                                                            minFontSize:
+                                                                                14.0,
+                                                                            style: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                  font: GoogleFonts.inter(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                                                                                  ),
+                                                                                  color: Color(0xFF181818),
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
+                                                                  Align(
+                                                                    alignment:
+                                                                        AlignmentDirectional(
+                                                                            0.0,
+                                                                            1.0),
+                                                                    child:
+                                                                        Container(
+                                                                      width:
+                                                                          157.4,
+                                                                      height:
+                                                                          51.7,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .accent4,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(12.0),
+                                                                      ),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.spaceBetween,
+                                                                        children: [
+                                                                          Align(
+                                                                            alignment:
+                                                                                AlignmentDirectional(-1.0, -1.0),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 0.0, 0.0),
+                                                                              child: AutoSizeText(
+                                                                                itemListaQuetenhoAcessoItem.title.maybeHandleOverflow(
+                                                                                  maxChars: 7,
+                                                                                  replacement: '…',
+                                                                                ),
+                                                                                textAlign: TextAlign.start,
+                                                                                minFontSize: 14.0,
+                                                                                style: FlutterFlowTheme.of(context).titleMedium.override(
+                                                                                      font: GoogleFonts.interTight(
+                                                                                        fontWeight: FlutterFlowTheme.of(context).titleMedium.fontWeight,
+                                                                                        fontStyle: FlutterFlowTheme.of(context).titleMedium.fontStyle,
+                                                                                      ),
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FlutterFlowTheme.of(context).titleMedium.fontWeight,
+                                                                                      fontStyle: FlutterFlowTheme.of(context).titleMedium.fontStyle,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          Align(
+                                                                            alignment:
+                                                                                AlignmentDirectional(1.0, 1.0),
+                                                                            child:
+                                                                                Stack(
+                                                                              children: [
+                                                                                Align(
+                                                                                  alignment: AlignmentDirectional(1.0, 1.0),
+                                                                                  child: Padding(
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 7.0, 7.0),
+                                                                                    child: Container(
+                                                                                      width: 36.1,
+                                                                                      height: 36.1,
+                                                                                      decoration: BoxDecoration(
+                                                                                        color: FlutterFlowTheme.of(context).accent3,
+                                                                                        shape: BoxShape.circle,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+
+                                                                                // Revisar ação -> não ta sumindo automaticamente quando exclui o acesso
+                                                                                Align(
+                                                                                  alignment: AlignmentDirectional(-2.36, -0.06),
+                                                                                  child: FlutterFlowIconButton(
+                                                                                    borderRadius: 8.0,
+                                                                                    buttonSize: 40.0,
+                                                                                    icon: Icon(
+                                                                                      Icons.person_remove_alt_1_sharp,
+                                                                                      color: Colors.black,
+                                                                                      size: 24.0,
+                                                                                    ),
+                                                                                    onPressed: () async {
+                                                                                      await listaQueTenhoAcessoItem.reference.delete();
+                                                                                      await showDialog(
+                                                                                        context: context,
+                                                                                        builder: (alertDialogContext) {
+                                                                                          return AlertDialog(
+                                                                                            title: Text('Remoção de acesso'),
+                                                                                            content: Text('Você se deletou da lista com sucesso.'),
+                                                                                            actions: [
+                                                                                              TextButton(
+                                                                                                onPressed: () => Navigator.pop(alertDialogContext),
+                                                                                                child: Text('Ok'),
+                                                                                              ),
+                                                                                            ],
+                                                                                          );
+                                                                                        },
+                                                                                      );
+                                                                                      // PesquisaListasAcesso
+                                                                                      await queryListsRecordOnce(
+                                                                                        queryBuilder: (listsRecord) => listsRecord.where(
+                                                                                          'listaID',
+                                                                                          isEqualTo: listaQueTenhoAcessoItem.lista,
+                                                                                        ),
+                                                                                        singleRecord: true,
+                                                                                      ).then((s) => s.firstOrNull);
+
+                                                                                      safeSetState(() {});
+                                                                                    },
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
-                                                        Align(
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  1.0, 1.0),
-                                                          child: Stack(
-                                                            children: [
-                                                              Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        1.0,
-                                                                        1.0),
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          7.0,
-                                                                          7.0),
-                                                                  child:
-                                                                      Container(
-                                                                    width: 36.1,
-                                                                    height:
-                                                                        36.1,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .accent3,
-                                                                      shape: BoxShape
-                                                                          .circle,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        -1.94,
-                                                                        0.75),
-                                                                child:
-                                                                    FlutterFlowIconButton(
-                                                                  borderRadius:
-                                                                      8.0,
-                                                                  buttonSize:
-                                                                      40.0,
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .push_pin_outlined,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    size: 24.0,
-                                                                  ),
-                                                                  onPressed:
-                                                                      () async {
-                                                                    await gridViewTenhoAcessoListsRecord
-                                                                        .reference
-                                                                        .update(
-                                                                            createListsRecordData(
-                                                                      marked:
-                                                                          true,
-                                                                    ));
-                                                                  },
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      );
-                                    },
-                                  ),
+                                        );
+                                      },
+                                    );
+                                  },
                                 );
                               },
                             ),
