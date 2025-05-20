@@ -139,25 +139,41 @@ class _ListaWidgetState extends State<ListaWidget> {
                       size: 24.0,
                     ),
                     onPressed: () async {
-                      var listsRecordReference = ListsRecord.collection.doc();
-                      await listsRecordReference.set(createListsRecordData(
-                        title: _model.tituloTextController.text,
-                        createdBy: currentUserReference,
-                        content: _model.campoTextoTextController.text,
-                        marked: false,
-                      ));
-                      _model.itemNew = ListsRecord.getDocumentFromData(
-                          createListsRecordData(
-                            title: _model.tituloTextController.text,
-                            createdBy: currentUserReference,
-                            content: _model.campoTextoTextController.text,
-                            marked: false,
-                          ),
-                          listsRecordReference);
-                      FFAppState().botaoCriarLista = true;
-                      safeSetState(() {});
-                      FFAppState().listaCriada = true;
-                      safeSetState(() {});
+                      if (_model.tituloTextController.text != '') {
+                        var listsRecordReference = ListsRecord.collection.doc();
+                        await listsRecordReference.set(createListsRecordData(
+                          title: _model.tituloTextController.text,
+                          createdBy: currentUserReference,
+                          content: _model.campoTextoTextController.text,
+                          marked: false,
+                        ));
+                        _model.itemNew = ListsRecord.getDocumentFromData(
+                            createListsRecordData(
+                              title: _model.tituloTextController.text,
+                              createdBy: currentUserReference,
+                              content: _model.campoTextoTextController.text,
+                              marked: false,
+                            ),
+                            listsRecordReference);
+                        FFAppState().listaCriada = true;
+                        safeSetState(() {});
+                      } else {
+                        await showDialog(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              content: Text('Titulo não preenchido'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext),
+                                  child: Text('Ok'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
 
                       safeSetState(() {});
                     },
