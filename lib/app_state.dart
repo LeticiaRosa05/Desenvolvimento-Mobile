@@ -113,6 +113,12 @@ class FFAppState extends ChangeNotifier {
   set botaoCriarLista(bool value) {
     _botaoCriarLista = value;
   }
+
+  bool _listaCriada = false;
+  bool get listaCriada => _listaCriada;
+  set listaCriada(bool value) {
+    _listaCriada = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

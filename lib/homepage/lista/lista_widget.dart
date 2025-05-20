@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +47,17 @@ class _ListaWidgetState extends State<ListaWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ListaModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (widget.titulo != null && widget.titulo != '') {
+        FFAppState().listaCriada = true;
+        safeSetState(() {});
+      } else {
+        FFAppState().listaCriada = false;
+        safeSetState(() {});
+      }
+    });
 
     _model.tituloTextController ??= TextEditingController(text: widget.titulo);
     _model.tituloFocusNode ??= FocusNode();
@@ -92,8 +104,7 @@ class _ListaWidgetState extends State<ListaWidget> {
               },
             ),
             title: Visibility(
-              visible: widget.refListaAtual?.id != null &&
-                  widget.refListaAtual?.id != '',
+              visible: FFAppState().listaCriada,
               child: Align(
                 alignment: AlignmentDirectional(1.0, 0.0),
                 child: FlutterFlowIconButton(
@@ -116,9 +127,7 @@ class _ListaWidgetState extends State<ListaWidget> {
             ),
             actions: [
               Visibility(
-                visible: (widget.refListaAtual?.id == null ||
-                        widget.refListaAtual?.id == '') ||
-                    (FFAppState().botaoCriarLista == false),
+                visible: !FFAppState().listaCriada,
                 child: Align(
                   alignment: AlignmentDirectional(0.0, -1.0),
                   child: FlutterFlowIconButton(
@@ -147,46 +156,35 @@ class _ListaWidgetState extends State<ListaWidget> {
                           listsRecordReference);
                       FFAppState().botaoCriarLista = true;
                       safeSetState(() {});
-                      await showDialog(
-                        context: context,
-                        builder: (alertDialogContext) {
-                          return AlertDialog(
-                            title: Text('Sucesso'),
-                            content: Text('Criado com sucesso'),
-                            actions: [
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext),
-                                child: Text('Ok'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                      FFAppState().listaCriada = true;
+                      safeSetState(() {});
 
                       safeSetState(() {});
                     },
                   ),
                 ),
               ),
-              FlutterFlowIconButton(
-                borderRadius: 8.0,
-                buttonSize: 40.0,
-                icon: Icon(
-                  Icons.more_vert,
-                  size: 24.0,
+              Visibility(
+                visible: FFAppState().listaCriada,
+                child: FlutterFlowIconButton(
+                  borderRadius: 8.0,
+                  buttonSize: 40.0,
+                  icon: Icon(
+                    Icons.more_vert,
+                    size: 24.0,
+                  ),
+                  onPressed: () async {
+                    context.pushNamed(
+                      ConfigListaWidget.routeName,
+                      queryParameters: {
+                        'listaRef': serializeParam(
+                          widget.refListaAtual,
+                          ParamType.DocumentReference,
+                        ),
+                      }.withoutNulls,
+                    );
+                  },
                 ),
-                onPressed: () async {
-                  context.pushNamed(
-                    ConfigListaWidget.routeName,
-                    queryParameters: {
-                      'listaRef': serializeParam(
-                        widget.refListaAtual,
-                        ParamType.DocumentReference,
-                      ),
-                    }.withoutNulls,
-                  );
-                },
               ),
             ],
             centerTitle: false,
