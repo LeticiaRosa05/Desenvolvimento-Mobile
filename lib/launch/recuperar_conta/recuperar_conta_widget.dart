@@ -1,8 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'recuperar_conta_model.dart';
@@ -44,48 +44,58 @@ class _RecuperarContaWidgetState extends State<RecuperarContaWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primary,
-        automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30.0,
-          borderWidth: 1.0,
-          buttonSize: 60.0,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: FlutterFlowTheme.of(context).primaryText,
-            size: 30.0,
-          ),
-          onPressed: () async {
-            context.pop();
-          },
-        ),
-        title: Align(
-          alignment: AlignmentDirectional(-1.0, 0.0),
-          child: Text(
-            FFLocalizations.of(context).getText(
-              'izqiyb53' /* Voltar */,
-            ),
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.interTight(
-                    fontWeight:
-                        FlutterFlowTheme.of(context).headlineMedium.fontWeight,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
-                  ),
-                  letterSpacing: 0.0,
-                  fontWeight:
-                      FlutterFlowTheme.of(context).headlineMedium.fontWeight,
-                  fontStyle:
-                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+      appBar: responsiveVisibility(
+        context: context,
+        tabletLandscape: false,
+        desktop: false,
+      )
+          ? AppBar(
+              backgroundColor: FlutterFlowTheme.of(context).primary,
+              automaticallyImplyLeading: false,
+              leading: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: Icon(
+                  Icons.arrow_back_rounded,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 30.0,
                 ),
-          ),
-        ),
-        actions: [],
-        centerTitle: false,
-        elevation: 0.0,
-      ),
+                onPressed: () async {
+                  context.pop();
+                },
+              ),
+              title: Align(
+                alignment: AlignmentDirectional(-1.0, 0.0),
+                child: Text(
+                  FFLocalizations.of(context).getText(
+                    'izqiyb53' /* Voltar */,
+                  ),
+                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        font: GoogleFonts.interTight(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .fontWeight,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .fontStyle,
+                        ),
+                        letterSpacing: 0.0,
+                        fontWeight: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .fontWeight,
+                        fontStyle: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .fontStyle,
+                      ),
+                ),
+              ),
+              actions: [],
+              centerTitle: false,
+              elevation: 0.0,
+            )
+          : null,
       body: Align(
         alignment: AlignmentDirectional(0.0, -1.0),
         child: Container(

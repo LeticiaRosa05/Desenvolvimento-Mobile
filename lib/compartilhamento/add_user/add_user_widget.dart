@@ -1,9 +1,9 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:text_search/text_search.dart';
@@ -61,42 +61,50 @@ class _AddUserWidgetState extends State<AddUserWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderRadius: 20.0,
-            buttonSize: 40.0,
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 24.0,
-            ),
-            onPressed: () async {
-              context.safePop();
-            },
-          ),
-          title: Text(
-            FFLocalizations.of(context).getText(
-              'ogilanlp' /* Add Users */,
-            ),
-            style: FlutterFlowTheme.of(context).titleLarge.override(
-                  font: GoogleFonts.interTight(
-                    fontWeight:
-                        FlutterFlowTheme.of(context).titleLarge.fontWeight,
-                    fontStyle:
-                        FlutterFlowTheme.of(context).titleLarge.fontStyle,
+        appBar: responsiveVisibility(
+          context: context,
+          tabletLandscape: false,
+          desktop: false,
+        )
+            ? AppBar(
+                backgroundColor: FlutterFlowTheme.of(context).primary,
+                automaticallyImplyLeading: false,
+                leading: FlutterFlowIconButton(
+                  borderRadius: 20.0,
+                  buttonSize: 40.0,
+                  icon: Icon(
+                    Icons.arrow_back_rounded,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    size: 24.0,
                   ),
-                  letterSpacing: 0.0,
-                  fontWeight:
-                      FlutterFlowTheme.of(context).titleLarge.fontWeight,
-                  fontStyle: FlutterFlowTheme.of(context).titleLarge.fontStyle,
+                  onPressed: () async {
+                    context.safePop();
+                  },
                 ),
-          ),
-          actions: [],
-          centerTitle: true,
-          elevation: 0.0,
-        ),
+                title: Text(
+                  FFLocalizations.of(context).getText(
+                    'ogilanlp' /* Add Users */,
+                  ),
+                  style: FlutterFlowTheme.of(context).titleLarge.override(
+                        font: GoogleFonts.interTight(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleLarge
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleLarge.fontStyle,
+                        ),
+                        letterSpacing: 0.0,
+                        fontWeight:
+                            FlutterFlowTheme.of(context).titleLarge.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).titleLarge.fontStyle,
+                      ),
+                ),
+                actions: [],
+                centerTitle: true,
+                elevation: 0.0,
+              )
+            : null,
         body: SafeArea(
           top: true,
           child: Padding(
@@ -355,7 +363,7 @@ class _AddUserWidgetState extends State<AddUserWidget> {
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
                                             content: Text(
-                                                'Você não pode se adicionar à uma lista que você já tem acesso.'),
+                                                'Você não pode se adicionar à uma lista que você já tem acesso'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(

@@ -1,11 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -1511,177 +1511,133 @@ class _LoginSingUpWidgetState extends State<LoginSingUpWidget>
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 16.0),
-                                                  child: FutureBuilder<
-                                                      List<UsersRecord>>(
-                                                    future:
-                                                        queryUsersRecordOnce(
-                                                      queryBuilder:
-                                                          (usersRecord) =>
-                                                              usersRecord.where(
-                                                        'email',
-                                                        isEqualTo:
-                                                            currentUserEmail,
-                                                      ),
-                                                      limit: 1,
-                                                    ),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50.0,
-                                                            height: 50.0,
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              valueColor:
-                                                                  AlwaysStoppedAnimation<
-                                                                      Color>(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                              ),
+                                                  child: FFButtonWidget(
+                                                    onPressed: () async {
+                                                      GoRouter.of(context)
+                                                          .prepareAuthEvent();
+                                                      if (_model
+                                                              .senhaCadastroTextController
+                                                              .text !=
+                                                          _model
+                                                              .confirmarSenhaTextController
+                                                              .text) {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                              'Passwords don\'t match!',
                                                             ),
                                                           ),
                                                         );
+                                                        return;
                                                       }
-                                                      List<UsersRecord>
-                                                          buttonUsersRecordList =
-                                                          snapshot.data!;
 
-                                                      return FFButtonWidget(
-                                                        onPressed: () async {
-                                                          GoRouter.of(context)
-                                                              .prepareAuthEvent();
-                                                          if (_model
-                                                                  .senhaCadastroTextController
-                                                                  .text !=
-                                                              _model
-                                                                  .confirmarSenhaTextController
-                                                                  .text) {
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                              SnackBar(
-                                                                content: Text(
-                                                                  'Passwords don\'t match!',
-                                                                ),
-                                                              ),
-                                                            );
-                                                            return;
-                                                          }
-
-                                                          final user =
-                                                              await authManager
-                                                                  .createAccountWithEmail(
-                                                            context,
-                                                            _model
-                                                                .emailCadastroTextController
-                                                                .text,
-                                                            _model
-                                                                .senhaCadastroTextController
-                                                                .text,
-                                                          );
-                                                          if (user == null) {
-                                                            return;
-                                                          }
-
-                                                          await UsersRecord
-                                                              .collection
-                                                              .doc(user.uid)
-                                                              .update(
-                                                                  createUsersRecordData(
-                                                                displayName: _model
-                                                                    .nomeUsuarioTextController
-                                                                    .text,
-                                                              ));
-
-                                                          context.goNamedAuth(
-                                                              InicialWidget
-                                                                  .routeName,
-                                                              context.mounted);
-                                                        },
-                                                        text:
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .getText(
-                                                          'c0vdlzxb' /* Criar Conta */,
-                                                        ),
-                                                        options:
-                                                            FFButtonOptions(
-                                                          width: 230.0,
-                                                          height: 52.0,
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          iconPadding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmall
-                                                                  .override(
-                                                                    font: GoogleFonts
-                                                                        .plusJakartaSans(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      fontStyle: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .titleSmall
-                                                                          .fontStyle,
-                                                                    ),
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        16.0,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmall
-                                                                        .fontStyle,
-                                                                  ),
-                                                          elevation: 3.0,
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: Colors
-                                                                .transparent,
-                                                            width: 1.0,
-                                                          ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      40.0),
-                                                          hoverColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .accent4,
-                                                          hoverBorderSide:
-                                                              BorderSide(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
-                                                            width: 1.0,
-                                                          ),
-                                                        ),
+                                                      final user = await authManager
+                                                          .createAccountWithEmail(
+                                                        context,
+                                                        _model
+                                                            .emailCadastroTextController
+                                                            .text,
+                                                        _model
+                                                            .senhaCadastroTextController
+                                                            .text,
                                                       );
+                                                      if (user == null) {
+                                                        return;
+                                                      }
+
+                                                      await UsersRecord
+                                                          .collection
+                                                          .doc(user.uid)
+                                                          .update(
+                                                              createUsersRecordData(
+                                                            displayName: _model
+                                                                .nomeUsuarioTextController
+                                                                .text,
+                                                          ));
+
+                                                      context.goNamedAuth(
+                                                          InicialWidget
+                                                              .routeName,
+                                                          context.mounted);
                                                     },
+                                                    text: FFLocalizations.of(
+                                                            context)
+                                                        .getText(
+                                                      'c0vdlzxb' /* Criar Conta */,
+                                                    ),
+                                                    options: FFButtonOptions(
+                                                      width: 230.0,
+                                                      height: 52.0,
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      iconPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .plusJakartaSans(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 16.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontStyle,
+                                                              ),
+                                                      elevation: 3.0,
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              40.0),
+                                                      hoverColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .accent4,
+                                                      hoverBorderSide:
+                                                          BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        width: 1.0,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),

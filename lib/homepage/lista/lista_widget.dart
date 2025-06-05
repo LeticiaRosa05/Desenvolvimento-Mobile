@@ -1,9 +1,10 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
+import 'package:collection/collection.dart';
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -86,127 +87,150 @@ class _ListaWidgetState extends State<ListaWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50.0),
-          child: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primary,
-            automaticallyImplyLeading: false,
-            leading: FlutterFlowIconButton(
-              borderRadius: 30.0,
-              borderWidth: 1.0,
-              buttonSize: 80.0,
-              icon: Icon(
-                Icons.arrow_back_rounded,
-                size: 30.0,
-              ),
-              onPressed: () async {
-                context.safePop();
-              },
-            ),
-            title: Visibility(
-              visible: FFAppState().listaCriada,
-              child: Align(
-                alignment: AlignmentDirectional(1.0, 0.0),
-                child: FlutterFlowIconButton(
-                  borderRadius: 8.0,
-                  buttonSize: 40.0,
-                  fillColor: FlutterFlowTheme.of(context).primary,
-                  icon: Icon(
-                    Icons.check_sharp,
-                    size: 24.0,
-                  ),
-                  onPressed: () async {
-                    await widget.refListaAtual!.update(createListsRecordData(
-                      title: _model.tituloTextController.text,
-                      content: _model.campoTextoTextController.text,
-                      listaID: widget.refListaAtual?.id,
-                    ));
-                  },
-                ),
-              ),
-            ),
-            actions: [
-              Visibility(
-                visible: !FFAppState().listaCriada,
-                child: Align(
-                  alignment: AlignmentDirectional(0.0, -1.0),
-                  child: FlutterFlowIconButton(
-                    borderRadius: 8.0,
+        appBar: responsiveVisibility(
+          context: context,
+          tabletLandscape: false,
+          desktop: false,
+        )
+            ? PreferredSize(
+                preferredSize: Size.fromHeight(50.0),
+                child: AppBar(
+                  backgroundColor: FlutterFlowTheme.of(context).primary,
+                  automaticallyImplyLeading: false,
+                  leading: FlutterFlowIconButton(
+                    borderRadius: 30.0,
                     borderWidth: 1.0,
                     buttonSize: 80.0,
                     icon: Icon(
-                      Icons.add,
-                      size: 24.0,
+                      Icons.arrow_back_rounded,
+                      size: 30.0,
                     ),
                     onPressed: () async {
-                      if (_model.tituloTextController.text != '') {
-                        var listsRecordReference = ListsRecord.collection.doc();
-                        await listsRecordReference.set(createListsRecordData(
-                          title: _model.tituloTextController.text,
-                          createdBy: currentUserReference,
-                          content: _model.campoTextoTextController.text,
-                          marked: false,
-                        ));
-                        _model.itemNew = ListsRecord.getDocumentFromData(
-                            createListsRecordData(
-                              title: _model.tituloTextController.text,
-                              createdBy: currentUserReference,
-                              content: _model.campoTextoTextController.text,
-                              marked: false,
-                            ),
-                            listsRecordReference);
-                        FFAppState().listaCriada = true;
-                        safeSetState(() {});
-                      } else {
-                        await showDialog(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              content: Text('Titulo não preenchido'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext),
-                                  child: Text('Ok'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-
-                      safeSetState(() {});
+                      context.pushNamed(InicialWidget.routeName);
                     },
                   ),
-                ),
-              ),
-              Visibility(
-                visible: FFAppState().listaCriada,
-                child: FlutterFlowIconButton(
-                  borderRadius: 8.0,
-                  buttonSize: 40.0,
-                  icon: Icon(
-                    Icons.more_vert,
-                    size: 24.0,
-                  ),
-                  onPressed: () async {
-                    context.pushNamed(
-                      ConfigListaWidget.routeName,
-                      queryParameters: {
-                        'listaRef': serializeParam(
-                          widget.refListaAtual,
-                          ParamType.DocumentReference,
+                  title: Visibility(
+                    visible: FFAppState().listaCriada,
+                    child: Align(
+                      alignment: AlignmentDirectional(1.0, 0.0),
+                      child: FlutterFlowIconButton(
+                        borderRadius: 8.0,
+                        buttonSize: 40.0,
+                        fillColor: FlutterFlowTheme.of(context).primary,
+                        icon: Icon(
+                          Icons.check_sharp,
+                          size: 24.0,
                         ),
-                      }.withoutNulls,
-                    );
-                  },
+                        onPressed: () async {
+                          await widget.refListaAtual!
+                              .update(createListsRecordData(
+                            title: _model.tituloTextController.text,
+                            content: _model.campoTextoTextController.text,
+                            listaID: widget.refListaAtual?.id,
+                          ));
+                        },
+                      ),
+                    ),
+                  ),
+                  actions: [
+                    Visibility(
+                      visible: !FFAppState().listaCriada,
+                      child: Align(
+                        alignment: AlignmentDirectional(0.0, -1.0),
+                        child: FlutterFlowIconButton(
+                          borderRadius: 8.0,
+                          borderWidth: 1.0,
+                          buttonSize: 80.0,
+                          icon: Icon(
+                            Icons.add,
+                            size: 24.0,
+                          ),
+                          onPressed: () async {
+                            if (_model.tituloTextController.text != '') {
+                              var listsRecordReference =
+                                  ListsRecord.collection.doc();
+                              await listsRecordReference
+                                  .set(createListsRecordData(
+                                title: _model.tituloTextController.text,
+                                createdBy: currentUserReference,
+                                content: _model.campoTextoTextController.text,
+                                marked: false,
+                              ));
+                              _model.itemNew = ListsRecord.getDocumentFromData(
+                                  createListsRecordData(
+                                    title: _model.tituloTextController.text,
+                                    createdBy: currentUserReference,
+                                    content:
+                                        _model.campoTextoTextController.text,
+                                    marked: false,
+                                  ),
+                                  listsRecordReference);
+                              FFAppState().listaCriada = true;
+                              safeSetState(() {});
+                              await queryListsRecordOnce(
+                                singleRecord: true,
+                              ).then((s) => s.firstOrNull);
+                            } else {
+                              await showDialog(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    content:
+                                        Text('A lista precisa de um título'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(alertDialogContext),
+                                        child: Text('Ok'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
+
+                            context.pushNamed(InicialWidget.routeName);
+
+                            safeSetState(() {});
+                          },
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: FFAppState().listaCriada,
+                      child: FlutterFlowIconButton(
+                        borderRadius: 8.0,
+                        buttonSize: 40.0,
+                        icon: Icon(
+                          Icons.more_vert,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
+                          await widget.refListaAtual!
+                              .update(createListsRecordData(
+                            title: _model.tituloTextController.text,
+                            content: _model.campoTextoTextController.text,
+                            listaID: widget.refListaAtual?.id,
+                          ));
+
+                          context.pushNamed(
+                            ConfigListaWidget.routeName,
+                            queryParameters: {
+                              'listaRef': serializeParam(
+                                widget.refListaAtual,
+                                ParamType.DocumentReference,
+                              ),
+                            }.withoutNulls,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                  centerTitle: false,
+                  elevation: 0.0,
                 ),
-              ),
-            ],
-            centerTitle: false,
-            elevation: 0.0,
-          ),
-        ),
+              )
+            : null,
         body: SafeArea(
           top: true,
           child: SingleChildScrollView(

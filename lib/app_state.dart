@@ -112,6 +112,12 @@ class FFAppState extends ChangeNotifier {
   set listaCriada(bool value) {
     _listaCriada = value;
   }
+
+  bool _pesqListasInicial = false;
+  bool get pesqListasInicial => _pesqListasInicial;
+  set pesqListasInicial(bool value) {
+    _pesqListasInicial = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

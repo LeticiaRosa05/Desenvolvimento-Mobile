@@ -9,3 +9,4 @@ export '/launch/recuperar_conta/recuperar_conta_widget.dart'
 export '/compartilhamento/add_user/add_user_widget.dart' show AddUserWidget;
 export '/compartilhamento/config_lista/config_lista_widget.dart'
     show ConfigListaWidget;
+export '/homepage/inicial_copy/inicial_copy_widget.dart' show InicialCopyWidget;

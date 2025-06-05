@@ -5,10 +5,12 @@ import 'package:provider/provider.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/flutter_flow/flutter_flow_theme.dart';
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
+import 'package:lock_orientation_library_opafp4/index.dart'
+    as $lock_orientation_library_opafp4;
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -70,118 +72,157 @@ class AppStateNotifier extends ChangeNotifier {
   }
 }
 
-GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
-      initialLocation: '/',
-      debugLogDiagnostics: true,
-      refreshListenable: appStateNotifier,
-      navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? InicialWidget() : LoginSingUpWidget(),
-      routes: [
-        FFRoute(
-          name: '_initialize',
-          path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? InicialWidget() : LoginSingUpWidget(),
-        ),
-        FFRoute(
-          name: LogoWidget.routeName,
-          path: LogoWidget.routePath,
-          builder: (context, params) => LogoWidget(),
-        ),
-        FFRoute(
-          name: LoginSingUpWidget.routeName,
-          path: LoginSingUpWidget.routePath,
-          builder: (context, params) => LoginSingUpWidget(),
-        ),
-        FFRoute(
-          name: ConfigWidget.routeName,
-          path: ConfigWidget.routePath,
-          builder: (context, params) => ConfigWidget(
-            nomeUsuario: params.getParam(
-              'nomeUsuario',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['users'],
-            ),
+GoRouter createRouter(AppStateNotifier appStateNotifier) {
+  $lock_orientation_library_opafp4.initializeRoutes(
+    homePageWidgetName: 'lock_orientation_library_opafp4.HomePage',
+  );
+
+  return GoRouter(
+    initialLocation: '/',
+    debugLogDiagnostics: true,
+    refreshListenable: appStateNotifier,
+    navigatorKey: appNavigatorKey,
+    errorBuilder: (context, state) =>
+        appStateNotifier.loggedIn ? InicialWidget() : LoginSingUpWidget(),
+    routes: [
+      FFRoute(
+        name: '_initialize',
+        path: '/',
+        builder: (context, _) =>
+            appStateNotifier.loggedIn ? InicialWidget() : LoginSingUpWidget(),
+      ),
+      FFRoute(
+        name: LogoWidget.routeName,
+        path: LogoWidget.routePath,
+        builder: (context, params) => LogoWidget(),
+      ),
+      FFRoute(
+        name: LoginSingUpWidget.routeName,
+        path: LoginSingUpWidget.routePath,
+        builder: (context, params) => LoginSingUpWidget(),
+      ),
+      FFRoute(
+        name: ConfigWidget.routeName,
+        path: ConfigWidget.routePath,
+        builder: (context, params) => ConfigWidget(
+          nomeUsuario: params.getParam(
+            'nomeUsuario',
+            ParamType.DocumentReference,
+            isList: false,
+            collectionNamePath: ['users'],
           ),
         ),
-        FFRoute(
-          name: InicialWidget.routeName,
-          path: InicialWidget.routePath,
-          builder: (context, params) => InicialWidget(
-            listasAdiciona: params.getParam<String>(
-              'listasAdiciona',
-              ParamType.String,
-              isList: true,
-            ),
+      ),
+      FFRoute(
+        name: InicialWidget.routeName,
+        path: InicialWidget.routePath,
+        builder: (context, params) => InicialWidget(
+          listasAdiciona: params.getParam<String>(
+            'listasAdiciona',
+            ParamType.String,
+            isList: true,
+          ),
+          pesquisaInicial: params.getParam(
+            'pesquisaInicial',
+            ParamType.String,
+          ),
+          stateListaP: params.getParam(
+            'stateListaP',
+            ParamType.String,
           ),
         ),
-        FFRoute(
-          name: ListaWidget.routeName,
-          path: ListaWidget.routePath,
-          builder: (context, params) => ListaWidget(
-            titulo: params.getParam(
-              'titulo',
-              ParamType.String,
-            ),
-            corpo: params.getParam(
-              'corpo',
-              ParamType.String,
-            ),
-            refListaAtual: params.getParam(
-              'refListaAtual',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['lists'],
-            ),
-            nomeUsuario: params.getParam(
-              'nomeUsuario',
-              ParamType.String,
-            ),
-            email: params.getParam(
-              'email',
-              ParamType.String,
-            ),
+      ),
+      FFRoute(
+        name: ListaWidget.routeName,
+        path: ListaWidget.routePath,
+        builder: (context, params) => ListaWidget(
+          titulo: params.getParam(
+            'titulo',
+            ParamType.String,
+          ),
+          corpo: params.getParam(
+            'corpo',
+            ParamType.String,
+          ),
+          refListaAtual: params.getParam(
+            'refListaAtual',
+            ParamType.DocumentReference,
+            isList: false,
+            collectionNamePath: ['lists'],
+          ),
+          nomeUsuario: params.getParam(
+            'nomeUsuario',
+            ParamType.String,
+          ),
+          email: params.getParam(
+            'email',
+            ParamType.String,
           ),
         ),
-        FFRoute(
-          name: RecuperarContaWidget.routeName,
-          path: RecuperarContaWidget.routePath,
-          builder: (context, params) => RecuperarContaWidget(),
-        ),
-        FFRoute(
-          name: AddUserWidget.routeName,
-          path: AddUserWidget.routePath,
-          builder: (context, params) => AddUserWidget(
-            textoPesquisa: params.getParam(
-              'textoPesquisa',
-              ParamType.String,
-            ),
-            nomeUsuario: params.getParam(
-              'nomeUsuario',
-              ParamType.String,
-            ),
-            listaRefEditando: params.getParam(
-              'listaRefEditando',
-              ParamType.String,
-            ),
+      ),
+      FFRoute(
+        name: RecuperarContaWidget.routeName,
+        path: RecuperarContaWidget.routePath,
+        builder: (context, params) => RecuperarContaWidget(),
+      ),
+      FFRoute(
+        name: AddUserWidget.routeName,
+        path: AddUserWidget.routePath,
+        builder: (context, params) => AddUserWidget(
+          textoPesquisa: params.getParam(
+            'textoPesquisa',
+            ParamType.String,
+          ),
+          nomeUsuario: params.getParam(
+            'nomeUsuario',
+            ParamType.String,
+          ),
+          listaRefEditando: params.getParam(
+            'listaRefEditando',
+            ParamType.String,
           ),
         ),
-        FFRoute(
-          name: ConfigListaWidget.routeName,
-          path: ConfigListaWidget.routePath,
-          builder: (context, params) => ConfigListaWidget(
-            listaRef: params.getParam(
-              'listaRef',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['lists'],
-            ),
+      ),
+      FFRoute(
+        name: ConfigListaWidget.routeName,
+        path: ConfigListaWidget.routePath,
+        builder: (context, params) => ConfigListaWidget(
+          listaRef: params.getParam(
+            'listaRef',
+            ParamType.DocumentReference,
+            isList: false,
+            collectionNamePath: ['lists'],
           ),
-        )
-      ].map((r) => r.toRoute(appStateNotifier)).toList(),
-    );
+        ),
+      ),
+      FFRoute(
+        name: InicialCopyWidget.routeName,
+        path: InicialCopyWidget.routePath,
+        builder: (context, params) => InicialCopyWidget(
+          listasAdiciona: params.getParam<String>(
+            'listasAdiciona',
+            ParamType.String,
+            isList: true,
+          ),
+          pesquisaInicial: params.getParam(
+            'pesquisaInicial',
+            ParamType.String,
+          ),
+          stateListaP: params.getParam(
+            'stateListaP',
+            ParamType.String,
+          ),
+        ),
+      ),
+      FFRoute(
+        name: $lock_orientation_library_opafp4.HomePageWidget.routeName,
+        path: $lock_orientation_library_opafp4.HomePageWidget.routePath,
+        builder: (context, params) =>
+            $lock_orientation_library_opafp4.HomePageWidget(),
+      )
+    ].map((r) => r.toRoute(appStateNotifier)).toList(),
+  );
+}
 
 extension NavParamExtensions on Map<String, String?> {
   Map<String, String> get withoutNulls => Map.fromEntries(

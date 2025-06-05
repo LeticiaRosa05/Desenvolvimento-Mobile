@@ -251,23 +251,23 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // inicial
   {
-    '899y2kmb': {
+    '3zjq3jk7': {
       'pt': 'Bem vindo, ',
-      'en': 'Welcome,',
+      'en': 'Welcome, ',
     },
-    '8i36ce6h': {
+    '0mtk3lng': {
       'pt': 'Procure em suas listas...',
-      'en': 'Search your lists...',
+      'en': '',
     },
-    'qxkzh21q': {
+    'judluiqq': {
       'pt': 'Listas marcadas',
       'en': 'Marked lists',
     },
-    'hzac5n3n': {
+    '17vr6yan': {
       'pt': 'Minhas listas',
       'en': 'My lists',
     },
-    'sv2qdwc8': {
+    'smem42x1': {
       'pt': 'Listas que tenho acesso',
       'en': 'Lists I have access to',
     },
@@ -367,6 +367,37 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'q5vl02ma': {
       'pt': 'Home',
       'en': '',
+    },
+  },
+  // inicialCopy
+  {
+    '9p7p11ny': {
+      'pt': 'Bem vindo, ',
+      'en': 'Welcome, ',
+    },
+    'g37u5040': {
+      'pt': 'Procure em suas listas...',
+      'en': '',
+    },
+    '9hljdu7r': {
+      'pt': 'Procure em suas listas...',
+      'en': '',
+    },
+    'fw63c3f2': {
+      'pt': 'Listas marcadas',
+      'en': 'Marked lists',
+    },
+    'tocy1ey0': {
+      'pt': 'Minhas listas',
+      'en': 'My lists',
+    },
+    '4ubwixfu': {
+      'pt': 'Listas que tenho acesso',
+      'en': 'Lists I have access to',
+    },
+    'jolpttjm': {
+      'pt': 'Home',
+      'en': 'Home',
     },
   },
   // Miscellaneous

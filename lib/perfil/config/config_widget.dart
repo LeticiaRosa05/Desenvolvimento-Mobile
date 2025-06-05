@@ -2,11 +2,11 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_language_selector.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:ff_theme/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'config_model.dart';
@@ -54,46 +54,54 @@ class _ConfigWidgetState extends State<ConfigWidget> {
       key: scaffoldKey,
       resizeToAvoidBottomInset: false,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primary,
-        automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30.0,
-          borderWidth: 1.0,
-          buttonSize: 60.0,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: Color(0xFF212020),
-            size: 30.0,
-          ),
-          onPressed: () async {
-            context.pop();
-          },
-        ),
-        title: Text(
-          FFLocalizations.of(context).getText(
-            'dnkhe2wl' /* Meus dados */,
-          ),
-          style: FlutterFlowTheme.of(context).displaySmall.override(
-                font: GoogleFonts.interTight(
-                  fontWeight:
-                      FlutterFlowTheme.of(context).displaySmall.fontWeight,
-                  fontStyle:
-                      FlutterFlowTheme.of(context).displaySmall.fontStyle,
+      appBar: responsiveVisibility(
+        context: context,
+        tabletLandscape: false,
+        desktop: false,
+      )
+          ? AppBar(
+              backgroundColor: FlutterFlowTheme.of(context).primary,
+              automaticallyImplyLeading: false,
+              leading: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: Icon(
+                  Icons.arrow_back_rounded,
+                  color: Color(0xFF212020),
+                  size: 30.0,
                 ),
-                color: FlutterFlowTheme.of(context).primaryText,
-                fontSize: 30.0,
-                letterSpacing: 0.0,
-                fontWeight:
-                    FlutterFlowTheme.of(context).displaySmall.fontWeight,
-                fontStyle: FlutterFlowTheme.of(context).displaySmall.fontStyle,
+                onPressed: () async {
+                  context.pushNamed(InicialWidget.routeName);
+                },
               ),
-        ),
-        actions: [],
-        centerTitle: true,
-        elevation: 2.0,
-      ),
+              title: Text(
+                FFLocalizations.of(context).getText(
+                  'dnkhe2wl' /* Meus dados */,
+                ),
+                style: FlutterFlowTheme.of(context).displaySmall.override(
+                      font: GoogleFonts.interTight(
+                        fontWeight: FlutterFlowTheme.of(context)
+                            .displaySmall
+                            .fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).displaySmall.fontStyle,
+                      ),
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      fontSize: 30.0,
+                      letterSpacing: 0.0,
+                      fontWeight:
+                          FlutterFlowTheme.of(context).displaySmall.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).displaySmall.fontStyle,
+                    ),
+              ),
+              actions: [],
+              centerTitle: true,
+              elevation: 2.0,
+            )
+          : null,
       body: Stack(
         children: [
           Column(
